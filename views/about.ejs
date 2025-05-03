@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Hugo Villeneuve | Aznet</title>
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <link href="/css/aznet-theme.css" rel="stylesheet">
+    <style>
+      .about-container {
+        background: var(--color-900);
+        border-radius: var(--radius-double);
+        box-shadow: var(--shadow);
+        max-width: 700px;
+        margin: 3rem auto 3rem auto;
+        padding: 2.5rem 2rem 2rem 2rem;
+      }
+      .about-title {
+        color: var(--color-primary);
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.5rem;
+      }
+      .about-section-title {
+        color: var(--color-primary);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.04em;
+      }
+      .about-list {
+        margin-bottom: 1.5rem;
+        color: var(--color-200);
+        font-size: 1rem;
+        padding-left: 1.2rem;
+      }
+      .about-list li {
+        margin-bottom: 0.5rem;
+      }
+      .about-contact {
+        margin-top: 2rem;
+        color: var(--color-400);
+        font-size: 1rem;
+      }
+      .about-projects-note {
+        margin-top: 2rem;
+        color: var(--color-200);
+        font-size: 1.1rem;
+        font-style: italic;
+      }
+      .aznet-nav {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 0.5rem 0 1.5rem 0;
+      }
+      .aznet-nav a {
+        color: var(--color-link);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 0.3rem 1.2rem;
+        border-radius: var(--radius);
+        transition: var(--transition);
+      }
+      .aznet-nav a.active, .aznet-nav a:hover {
+        background: var(--color-primary);
+        color: var(--color-body-dark);
+      }
+    </style>
+</head>
+<body>
+    <header class="shadow-2xl relative z-10" style="background: var(--color-900);">
+        <div class="max-w-2xl mx-auto px-4 py-8 flex flex-col items-center">
+            <a href="/" style="text-decoration:none;"><span class="aznet-logo">AZNET</span></a>
+            <div class="aznet-banner-bar"></div>
+            <span class="aznet-subtitle">Your Gaming Tools Hub</span>
+        </div>
+        <nav class="aznet-nav">
+            <a href="/" >Home</a>
+            <a href="/about" class="active">About</a>
+        </nav>
+    </header>
+
+    <main class="about-container">
+        <div class="max-w-2xl mx-auto px-4 py-8">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold mb-4" style="color: var(--color-100);">About Me</h1>
+                <p class="text-lg" style="color: var(--color-300);">
+                    Passionate developer creating tools to enhance your gaming experience
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="about-section">
+                    <h2 class="text-2xl font-bold mb-4" style="color: var(--color-100);">Who Am I?</h2>
+                    <p style="color: var(--color-300);">
+                        I'm a dedicated developer with a passion for gaming and creating tools that make gaming experiences better. 
+                        My journey started with a simple idea: to solve problems I encountered while playing my favorite games.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2 class="text-2xl font-bold mb-4" style="color: var(--color-100);">My Mission</h2>
+                    <p style="color: var(--color-300);">
+                        I believe that gaming should be about having fun, not struggling with tedious tasks. 
+                        That's why I create tools that automate the boring stuff, so you can focus on what matters most - enjoying the game.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2 class="text-2xl font-bold mb-4" style="color: var(--color-100);">My Approach</h2>
+                    <p style="color: var(--color-300);">
+                        Every tool I create comes from real gaming experience. I play the games myself, 
+                        identify pain points, and develop solutions that are both practical and user-friendly.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2 class="text-2xl font-bold mb-4" style="color: var(--color-100);">Get in Touch</h2>
+                    <p style="color: var(--color-300);">
+                        Have a suggestion or feedback? I'd love to hear from you! Reach out through the contact form or join our community.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-16 relative z-10" style="background: var(--color-900); border-radius: var(--radius-double); max-width: 700px; margin: 0 auto 2rem auto;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <p class="text-center font-medium" style="color: var(--color-300);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
+        </div>
+    </footer>
+</body>
+</html> 

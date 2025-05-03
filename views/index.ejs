@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aznet - Gaming Tools Portal</title>
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <link href="/css/aznet-theme.css" rel="stylesheet">
+    <style>
+      body {
+        background: radial-gradient(ellipse at 60% 40%, #23272f 60%, #11121a 100%);
+        min-height: 100vh;
+      }
+      .aznet-logo {
+        font-family: 'Trispace', 'Hack Nerd Font', monospace, sans-serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        color: var(--color-primary);
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+      .aznet-banner-bar {
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        border-radius: 3px;
+        margin-top: 0.8rem;
+        margin-bottom: 0.5rem;
+        box-shadow: 0 2px 12px 0 var(--color-primary-dark);
+      }
+      .aznet-subtitle {
+        color: var(--color-400);
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        margin-top: 0.2rem;
+      }
+      .aznet-nav {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 0.5rem 0 1.5rem 0;
+      }
+      .aznet-nav a {
+        color: var(--color-link);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1rem;
+        padding: 0.3rem 1.2rem;
+        border-radius: var(--radius);
+        transition: var(--transition);
+        background: none;
+        border: none;
+        outline: none;
+        display: inline-block;
+      }
+      .aznet-nav a.active, .aznet-nav a:hover {
+        background: var(--color-primary);
+        color: var(--color-body-dark);
+      }
+      .aznet-nav a.hire {
+        background: var(--color-secondary);
+        color: var(--color-900);
+        font-weight: 800;
+        margin-left: 1.5rem;
+        box-shadow: 0 2px 12px 0 var(--color-secondary);
+      }
+      .aznet-nav a.hire:hover {
+        background: var(--color-primary);
+        color: var(--color-body-dark);
+      }
+      .aznet-search {
+        width: 100%;
+        max-width: 420px;
+        margin: 2rem auto 1.5rem auto;
+        display: flex;
+        align-items: center;
+        background: var(--color-800);
+        border-radius: var(--radius-double);
+        box-shadow: var(--shadow);
+        padding: 0.5rem 1.5rem;
+      }
+      .aznet-search input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--color-100);
+        font-size: 1.1rem;
+        width: 100%;
+        padding: 0.5rem 0;
+        font-family: inherit;
+      }
+      .aznet-search input::placeholder {
+        color: var(--color-400);
+        opacity: 1;
+      }
+      .aznet-list {
+        background: none;
+        box-shadow: none;
+        max-width: 900px;
+        margin: 0 auto 3rem auto;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .aznet-card {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        background: var(--color-900);
+        border-radius: var(--radius-double);
+        box-shadow: 0 8px 32px 0 #00000040, var(--shadow);
+        overflow: hidden;
+        transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
+        border: 1.5px solid var(--color-800);
+        min-height: 260px;
+        position: relative;
+      }
+      .aznet-card:hover {
+        transform: translateY(-6px) scale(1.025);
+        box-shadow: 0 16px 48px 0 var(--color-primary-dark), 0 8px 32px 0 #00000040;
+        border-color: var(--color-primary);
+      }
+      .aznet-card-img {
+        width: 320px;
+        min-width: 220px;
+        max-width: 340px;
+        object-fit: cover;
+        border-radius: var(--radius-double) 0 0 var(--radius-double);
+        background: var(--color-800);
+        border-right: 2px solid var(--color-primary);
+        box-shadow: 0 2px 12px 0 #00000022;
+        transition: filter 0.3s;
+        filter: brightness(0.98) contrast(1.08);
+      }
+      .aznet-card:hover .aznet-card-img {
+        filter: brightness(1.05) contrast(1.12) saturate(1.1);
+      }
+      .aznet-card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2.2rem 2.5rem;
+        min-width: 0;
+      }
+      .aznet-card-title {
+        color: var(--color-primary);
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.04em;
+        text-shadow: 0 2px 8px #00000022;
+      }
+      .aznet-card-desc {
+        color: var(--color-200);
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.6;
+        text-shadow: 0 1px 4px #00000018;
+      }
+      .aznet-card-link {
+        display: inline-block;
+        background: var(--color-primary);
+        color: var(--color-body-dark);
+        font-weight: 700;
+        padding: 0.8rem 2.2rem;
+        border-radius: var(--radius);
+        box-shadow: 0 2px 12px 0 var(--color-primary);
+        transition: var(--transition);
+        text-decoration: none;
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+      }
+      .aznet-card-link:hover {
+        background: var(--color-secondary);
+        color: var(--color-900);
+      }
+      @media (max-width: 900px) {
+        .aznet-list {
+          max-width: 100%;
+        }
+        .aznet-card {
+          flex-direction: column;
+          min-height: unset;
+        }
+        .aznet-card-img {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+          border-radius: var(--radius-double) var(--radius-double) 0 0;
+          border-right: none;
+          border-bottom: 2px solid var(--color-primary);
+        }
+        .aznet-card-content {
+          padding: 1.5rem 1.2rem;
+        }
+      }
+    </style>
+</head>
+<body>
+    <header class="shadow-2xl relative z-10" style="background: var(--color-900);">
+        <div class="max-w-2xl mx-auto px-4 py-8 flex flex-col items-center">
+            <span class="aznet-logo">AZNET</span>
+            <div class="aznet-banner-bar"></div>
+            <span class="aznet-subtitle">Your Gaming Tools Hub</span>
+        </div>
+        <nav class="aznet-nav">
+            <a href="/" class="active">Projects</a>
+            <a href="/about">About Me</a>
+            <a href="mailto:aznettechnicalservices@gmail.com" class="hire">Hire Me</a>
+        </nav>
+    </header>
+
+    <div class="aznet-search">
+        <input type="text" placeholder="Search your tools... (UI only)" />
+    </div>
+
+    <main class="aznet-list">
+        <% websites.forEach((website) => { %>
+            <div class="aznet-card">
+                <img src="<%= website.image %>" alt="<%= website.name %> screenshot" class="aznet-card-img">
+                <div class="aznet-card-content">
+                    <div class="aznet-card-title"><%= website.name %></div>
+                    <div class="aznet-card-desc"><%= website.description %></div>
+                    <a href="/project/<%= website.name.toLowerCase().replace(/\s+/g, '') %>" class="aznet-card-link">
+                        More info
+                    </a>
+                </div>
+            </div>
+        <% }); %>
+    </main>
+
+    <footer class="mt-16 relative z-10" style="background: var(--color-900); border-radius: var(--radius-double); max-width: 900px; margin: 0 auto 2rem auto;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <p class="text-center font-medium" style="color: var(--color-300);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
+        </div>
+    </footer>
+</body>
+</html> 

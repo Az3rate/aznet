@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= project.name %> | Aznet</title>
+    <link href="/css/tailwind.css" rel="stylesheet">
+    <link href="/css/aznet-theme.css" rel="stylesheet">
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <style>
+      .project-container {
+        background: var(--color-900);
+        border-radius: var(--radius-double);
+        box-shadow: var(--shadow);
+        max-width: 900px;
+        margin: 3rem auto 3rem auto;
+        padding: 2.5rem 2rem 2rem 2rem;
+      }
+      .project-title {
+        color: var(--color-primary);
+        font-size: 2.4rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.5rem;
+      }
+      .project-img {
+        width: 100%;
+        max-width: 600px;
+        border-radius: var(--radius);
+        margin: 2rem auto 2rem auto;
+        display: block;
+        box-shadow: 0 4px 24px 0 #00000022;
+        border: 2px solid var(--color-primary);
+        background: var(--color-800);
+      }
+      .project-section-title {
+        color: var(--color-primary);
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.04em;
+      }
+      .project-desc {
+        color: var(--color-200);
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.6;
+      }
+      .project-back {
+        display: inline-block;
+        margin-bottom: 2rem;
+        background: var(--color-primary);
+        color: var(--color-body-dark);
+        font-weight: 700;
+        padding: 0.5rem 1.5rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+      .project-back:hover {
+        background: var(--color-secondary);
+        color: var(--color-900);
+      }
+      .mermaid {
+        background: var(--color-800);
+        border-radius: var(--radius);
+        margin: 2rem auto;
+        padding: 1.5rem 0.5rem;
+        box-shadow: 0 2px 12px 0 #00000022;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+      .project-section-list {
+        color: var(--color-200);
+        font-size: 1.05rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.7;
+        padding-left: 1.5rem;
+      }
+      .project-section-list li {
+        margin-bottom: 0.5rem;
+      }
+      .project-api-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        background: var(--color-800);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 2px 12px 0 #00000022;
+      }
+      .project-api-table th, .project-api-table td {
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid var(--color-700);
+        color: var(--color-200);
+        text-align: left;
+      }
+      .project-api-table th {
+        color: var(--color-primary);
+        font-weight: 700;
+        background: var(--color-900);
+      }
+      .project-api-table tr:last-child td {
+        border-bottom: none;
+      }
+    </style>
+</head>
+<body>
+    <header class="shadow-2xl relative z-10" style="background: var(--color-900);">
+        <div class="max-w-2xl mx-auto px-4 py-8 flex flex-col items-center">
+            <a href="/" style="text-decoration:none;"><span class="aznet-logo">AZNET</span></a>
+            <div class="aznet-banner-bar"></div>
+            <span class="aznet-subtitle">Your Gaming Tools Hub</span>
+        </div>
+        <nav class="aznet-nav">
+            <a href="/">Projects</a>
+            <a href="/about">About Me</a>
+            <a href="mailto:aznettechnicalservices@gmail.com" class="hire">Hire Me</a>
+        </nav>
+    </header>
+
+    <main class="project-container">
+        <a href="/" class="project-back">← Back to Projects</a>
+        <div class="project-title"><%= project.name %></div>
+        <img src="<%= project.image %>" alt="<%= project.name %> screenshot" class="project-img">
+        <div class="project-desc"><%= project.description %></div>
+
+        <% if (project.name === 'LootManager') { %>
+        <div class="project-section-title">Project Overview</div>
+        <div class="project-desc">
+            A comprehensive guild management system specifically designed for Throne and Liberty, focusing on DKP (Dragon Kill Points) tracking, raid scheduling, and loot distribution. Built to handle the unique needs of T&L's guild system and progression mechanics.
+        </div>
+        <div class="project-section-title">Key Features</div>
+        <ul class="project-section-list">
+            <li><strong>User Management:</strong> Authentication & Authorization, role-based access control, user profile management, guild selection and switching</li>
+            <li><strong>DKP Management:</strong> DKP tracking and distribution, session management, transaction history, user DKP balances</li>
+            <li><strong>Event Management:</strong> Event creation and scheduling, registration, attendance tracking, verification</li>
+            <li><strong>Guild Administration:</strong> User management, admin logs, team management, premium features</li>
+            <li><strong>Additional Features:</strong> Wishlist system, email notifications, privacy policy, premium upgrade system</li>
+        </ul>
+        <div class="project-section-title">Architecture Flowchart</div>
+        <div class="mermaid">
+        graph TD
+            User["User"] -->|Login/Auth| Frontend["React Dashboard"]
+            Frontend -->|API Calls| Backend["Firebase Functions API"]
+            Backend -->|Data| Firestore["Firestore DB"]
+            Frontend -->|Real-time Updates| Firestore
+            Admin["Admin"] -->|Manages| Backend
+            Frontend -->|Notifications| Email["Email Service"]
+        </div>
+        <div class="project-section-title">Technical Stack</div>
+        <ul class="project-section-list">
+            <li><strong>Frontend:</strong> React 18 (TypeScript), Redux Toolkit, Zustand, Material-UI v6, TailwindCSS, DaisyUI, AG Grid, FullCalendar, Notistack, React Intl, Framer Motion</li>
+            <li><strong>Backend:</strong> Firebase Firestore, Firebase Auth, Firebase Functions, Firebase Storage, Firebase Hosting</li>
+            <li><strong>Dev Tools:</strong> React Scripts, Jest, React Testing Library, TypeScript, ESLint, Firebase Emulators</li>
+        </ul>
+        <div class="project-section-title">Directory Structure (Key Parts)</div>
+        <ul class="project-section-list">
+            <li><code>src/api/</code> — API integration</li>
+            <li><code>src/components/</code> — Reusable UI components</li>
+            <li><code>src/features/</code> — Feature-specific components</li>
+            <li><code>src/hooks/</code> — Custom React hooks</li>
+            <li><code>src/interfaces/</code> — TypeScript interfaces</li>
+            <li><code>src/services/</code> — Business logic services</li>
+            <li><code>src/store/</code> — Redux store configuration</li>
+            <li><code>src/styles/</code> — Global styles</li>
+            <li><code>src/themes/</code> — Theme customization</li>
+            <li><code>src/types/</code> — TypeScript type definitions</li>
+            <li><code>src/utils/</code> — Utility functions</li>
+            <li><code>src/contexts/</code> — React contexts</li>
+        </ul>
+        <div class="project-section-title">API Endpoints</div>
+        <table class="project-api-table">
+            <tr><th>Category</th><th>Endpoint</th><th>Description</th></tr>
+            <tr><td>Authentication</td><td>/auth, /login, /select-guild</td><td>Authentication flow, user login, guild selection</td></tr>
+            <tr><td>DKP Management</td><td>/dkp-management, /sessions, /session/:sessionId</td><td>DKP admin, session management, session details</td></tr>
+            <tr><td>Event Management</td><td>/events, /event/:eventId, /event-registration/:eventId</td><td>Event listing, details, registration</td></tr>
+            <tr><td>User Management</td><td>/user-management, /user-details, /teams</td><td>User admin, profile, team management</td></tr>
+        </table>
+        <div class="project-section-title">Development Workflow</div>
+        <ul class="project-section-list">
+            <li>Local development with Firebase emulators, hot reloading, TypeScript compilation</li>
+            <li>Testing with Jest, React Testing Library, ESLint</li>
+            <li>Deployment via Firebase Hosting and GitHub Actions</li>
+        </ul>
+        <div class="project-section-title">Summary</div>
+        <div class="project-desc">
+            LootManager started as a simple way to help my Throne and Liberty guild keep track of who got what loot. It's grown into a full-featured system that makes guild life easier - from scheduling raids to managing DKP. I built it to solve real problems we faced in our guild, and it's been great seeing other guilds find it useful too.
+        </div>
+        <% } else if (project.name === 'RaidAlert') { %>
+        <div class="project-section-title">Project Overview</div>
+        <div class="project-desc">
+            <strong>Purpose:</strong> To protect ARK Survival Evolved bases by providing real-time raid notifications and tribe management through Discord. The system monitors server activity, tracks tribe resources, and alerts players of potential threats, helping tribes maintain their dominance in the harsh ARK environment.
+        </div>
+        <div class="project-section-title">Key Features</div>
+        <ul class="project-section-list">
+            <li><strong>Discord Bot:</strong> Monitors Discord channels for tribe-related activity, supports multi-tribe configurations per guild, handles commands and button interactions, provides real-time alerts, and logs activity/errors for audit and troubleshooting.</li>
+            <li><strong>Web Dashboard:</strong> Simple web interface for status monitoring, fetching and displaying tribe analytics and alert data.</li>
+            <li><strong>Backend API:</strong> RESTful endpoints for tribe configuration and license management, health check endpoint for uptime monitoring, centralized Firestore database for persistent storage.</li>
+            <li><strong>Licensing System:</strong> Supports tiered features and license expiration, admin endpoints for license management and auditing.</li>
+        </ul>
+        <div class="project-section-title">Architecture Flowchart</div>
+        <div class="mermaid">
+        graph TD
+            Discord["Discord Server"] -->|Bot Commands & Events| Bot["RaidAlert Discord Bot"]
+            Bot -->|API Calls| API["Express.js REST API"]
+            API -->|Data| Firestore["Google Firestore DB"]
+            API -->|Serves| Dashboard["Web Dashboard"]
+            Dashboard -->|Fetches Analytics| API
+            Admin["Admin"] -->|Manages Licenses| API
+        </div>
+        <div class="project-section-title">Technical Stack</div>
+        <ul class="project-section-list">
+            <li><strong>Backend:</strong> Node.js, Express.js, body-parser, cors, dotenv, firebase-admin</li>
+            <li><strong>Discord Bot:</strong> discord.js, modular handlers for commands and events</li>
+            <li><strong>Database:</strong> Google Firestore (firebase-admin)</li>
+            <li><strong>Frontend:</strong> Static HTML/JS dashboard</li>
+            <li><strong>DevOps & Tooling:</strong> nodemon, jest, concurrently, custom file-based logging</li>
+        </ul>
+        <div class="project-section-title">Directory Structure (Key Parts)</div>
+        <ul class="project-section-list">
+            <li><code>/index.js</code> — Main entry for the Discord bot</li>
+            <li><code>/backend/server.js</code> — Express server for API and dashboard</li>
+            <li><code>/backend/routes/</code> — API route definitions for tribes and licenses</li>
+            <li><code>/utils/</code> — Shared utilities (Firestore, tribe config, licensing, analytics)</li>
+            <li><code>/dashboard/</code> — Web dashboard server and static files</li>
+            <li><code>/logs/</code> — Log files for bot and server activity</li>
+        </ul>
+        <div class="project-section-title">Example API Endpoints</div>
+        <table class="project-api-table">
+            <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+            <tr><td>POST</td><td>/create-tribe-config</td><td>Create or update a tribe configuration</td></tr>
+            <tr><td>GET</td><td>/get-tribe-config/:guildId</td><td>Fetch a tribe config for a guild</td></tr>
+            <tr><td>GET</td><td>/check-license/:guildId</td><td>Check license status for a guild</td></tr>
+            <tr><td>POST</td><td>/update-license</td><td>Update or assign a license</td></tr>
+            <tr><td>GET</td><td>/all-licenses</td><td>(Admin) List all active licenses</td></tr>
+        </table>
+        <div class="project-section-title">Summary</div>
+        <div class="project-desc">
+            RaidAlert came from a real need - we kept getting raided in ARK when no one was online. I built this bot to give us a fighting chance, and it's been a game-changer for our tribe. It's not perfect, but it helps us sleep better knowing we'll get a heads-up if someone's messing with our base. The Discord integration makes it easy for everyone to stay in the loop.
+        </div>
+        <% } else if (project.name === 'D4UT') { %>
+        <div class="project-section-title">Project Overview</div>
+        <div class="project-desc">
+            A powerful web-based utility tool specifically designed for Diablo 4 players, offering advanced build optimization, damage calculations, and item comparison features. The tool helps players maximize their character's potential by analyzing stats, skills, and gear combinations.
+        </div>
+        <div class="project-section-title">Key Features</div>
+        <ul class="project-section-list">
+            <li><strong>Character Optimization:</strong> Build calculations, stat analysis, gear optimization</li>
+            <li><strong>Data Analysis:</strong> Comprehensive stat tracking, performance metrics</li>
+            <li><strong>User Interface:</strong> Interactive maps, build planners, stat calculators</li>
+            <li><strong>Localization:</strong> Multi-language support, internationalization</li>
+            <li><strong>Data Management:</strong> State management, data persistence, real-time updates</li>
+        </ul>
+        <div class="project-section-title">Architecture Flowchart</div>
+        <div class="mermaid">
+        graph TD
+            UI["User Interface"] --> RC["React Components"]
+            RC --> SM["State Management (Zustand)"]
+            SM --> DP["Data Processing"]
+            DP --> LS["Local Storage/API"]
+        </div>
+        <div class="project-section-title">Technical Stack</div>
+        <ul class="project-section-list">
+            <li><strong>Frontend:</strong> React 18 (TypeScript), Zustand, HeadlessUI, HeroIcons, React Icons, Styled Components</li>
+            <li><strong>Styling:</strong> TailwindCSS, SASS, PostCSS</li>
+            <li><strong>Maps & Visualization:</strong> Leaflet, React-Leaflet</li>
+            <li><strong>Internationalization:</strong> React Intl Universal</li>
+            <li><strong>UI Enhancements:</strong> React Tour, React Toastify, React Input Slider</li>
+            <li><strong>Development Tools:</strong> Vite, Yarn 3.6.1, TypeScript 5.0, ESLint</li>
+            <li><strong>Additional Libraries:</strong> Lodash, Immer, Dayjs, Axios, Jimp, Tesseract.js, Vercel Analytics</li>
+        </ul>
+        <div class="project-section-title">Directory Structure (Key Parts)</div>
+        <ul class="project-section-list">
+            <li><code>src/assets/</code> — Static assets</li>
+            <li><code>src/components/</code> — Reusable UI components</li>
+            <li><code>src/App.tsx</code> — Main application component</li>
+            <li><code>src/calculation.ts</code> — Build calculation logic</li>
+            <li><code>src/locales.ts</code> — Internationalization</li>
+            <li><code>src/main.tsx</code> — Application entry point</li>
+            <li><code>src/stats.tsx</code> — Statistics and analysis</li>
+            <li><code>src/store.tsx</code> — State management</li>
+        </ul>
+        <div class="project-section-title">Development Workflow</div>
+        <ul class="project-section-list">
+            <li>Local development with Vite's hot module replacement</li>
+            <li>TypeScript compilation and type checking</li>
+            <li>ESLint for code quality</li>
+            <li>Yarn for package management</li>
+            <li>Vite for building and previewing</li>
+        </ul>
+        <div class="project-section-title">Summary</div>
+        <div class="project-desc">
+            D4UT started as a personal project to help me figure out which gear was actually better in Diablo 4. I kept getting frustrated trying to compare items and calculate damage, so I built something to do the math for me. It's grown into a tool that helps other players make better decisions about their builds and gear. I'm always adding new features based on what players find useful.
+        </div>
+        <% } %>
+    </main>
+
+    <footer class="mt-16 relative z-10" style="background: var(--color-900); border-radius: var(--radius-double); max-width: 900px; margin: 0 auto 2rem auto;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <p class="text-center font-medium" style="color: var(--color-300);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
+        </div>
+    </footer>
+</body>
+</html> 

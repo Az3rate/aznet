@@ -1,0 +1,22 @@
+{
+  "name": "website-portal",
+  "version": "1.0.0",
+  "description": "A portal website showcasing multiple websites",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "build:css": "tailwindcss -i ./public/css/styles.css -o ./public/css/tailwind.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.3",
+    "nodemon": "^3.0.2"
+  }
+}
