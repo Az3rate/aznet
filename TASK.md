@@ -24,12 +24,18 @@
 - [x] Review and refactor any file approaching 500 lines (2024-06-10)
   - [x] All modular files are under 150 lines
 - [x] Add error handling for missing images in details panel (2024-06-10)
-- [ ] Enhance error handling and suggestions for mistyped commands (In Progress)
-  - [ ] Add fuzzy matching for command suggestions
-  - [ ] Add "did you mean" suggestions for mistyped commands
-  - [ ] Add command usage examples in error messages
-- [ ] Add automated tests and CI/CD pipeline (Planned)
-- [ ] Expand documentation for contributors and users (Planned)
+- [x] Enhance error handling and suggestions for mistyped commands (2024-06-10)
+  - [x] Add fuzzy matching for command suggestions
+  - [x] Add "did you mean" suggestions for mistyped commands
+  - [x] Add command usage examples in error messages
+- [x] Add automated tests and CI/CD pipeline (2024-06-10)
+  - [x] Set up Jest for JS unit testing
+  - [x] Add a sample test for terminal-commands.js
+  - [x] Add GitHub Actions workflow for CI
+  - [x] Document test and CI setup in README.md
+- [ ] Expand documentation for contributors and users (In Progress)
+  - [ ] Add a CONTRIBUTING.md file
+  - [ ] Add a section in README.md for contributors
 
 ## Completed Tasks
 - [x] Initial project setup and structure
@@ -54,5 +60,4 @@
 - [ ] Review all command registration and error handling for robustness after prompt/input refactor (2024-06-09)
 
 ## Future Tasks
-- [ ] Add automated tests and CI/CD pipeline
 - [ ] Expand documentation for contributors and users 

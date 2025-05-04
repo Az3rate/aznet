@@ -16,4 +16,8 @@ npm test
 
 ## Continuous Integration (CI)
 
-A GitHub Actions workflow is set up to automatically run all tests on every push and pull request to the `main` branch. See `.github/workflows/ci.yml` for details. 
+A GitHub Actions workflow is set up to automatically run all tests on every push and pull request to the `main` branch. See `.github/workflows/ci.yml` for details.
+
+## Contributors
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to get started, code style, and submitting pull requests. 

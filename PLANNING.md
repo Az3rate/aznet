@@ -1,6 +1,10 @@
 # PLANNING.md
 
 ## Current Work in Progress
+- Automated tests and CI/CD pipeline are complete and working (2024-06-10)
+- Expanding documentation for contributors and users (In Progress)
+  - Adding CONTRIBUTING.md
+  - Adding contributor section to README.md
 - Added architecture diagrams for all projects as static images
 - Updated project data to include architectureImage fields
 - Details panel now displays architecture diagrams alongside project information
