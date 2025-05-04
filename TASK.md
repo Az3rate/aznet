@@ -33,9 +33,13 @@
   - [x] Add a sample test for terminal-commands.js
   - [x] Add GitHub Actions workflow for CI
   - [x] Document test and CI setup in README.md
-- [ ] Expand documentation for contributors and users (In Progress)
-  - [ ] Add a CONTRIBUTING.md file
-  - [ ] Add a section in README.md for contributors
+- [x] Expand documentation for contributors and users (2024-06-10)
+  - [x] Add a CONTRIBUTING.md file
+  - [x] Add a section in README.md for contributors
+  - [x] Add a Code of Conduct
+- [ ] Enhance onboarding for new users in the terminal (In Progress)
+  - [ ] Add a welcome message with tips
+  - [ ] Add a first-time user guide or hint system
 
 ## Completed Tasks
 - [x] Initial project setup and structure

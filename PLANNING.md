@@ -2,6 +2,11 @@
 
 ## Current Work in Progress
 - Automated tests and CI/CD pipeline are complete and working (2024-06-10)
+- Documentation for contributors and users is complete (2024-06-10)
+- Code of Conduct is complete (2024-06-10)
+- Enhancing onboarding for new users in the terminal (In Progress)
+  - Adding a welcome message with tips
+  - Adding a first-time user guide or hint system
 - Expanding documentation for contributors and users (In Progress)
   - Adding CONTRIBUTING.md
   - Adding contributor section to README.md

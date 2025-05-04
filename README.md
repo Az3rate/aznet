@@ -32,4 +32,14 @@ If you find a bug or have a feature request, please [open an issue](https://gith
 
 ## Contributing
 
-This project is primarily a showcase of my work and abilities. While I am not actively seeking contributors, contributions are welcome if you are interested in trying something or improving the project. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. 
+This project is primarily a showcase of my work and abilities. While I am not actively seeking contributors, contributions are welcome if you are interested in trying something or improving the project. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## Onboarding & First-Time User Experience
+
+- When you first open the terminal, you'll see a welcome message with quick tips and clickable commands.
+- Type `help` or click the help command for a list of available commands.
+- New users will see hints and guidance for getting started.
+
+## Code of Conduct
+
+Participation in this project is governed by a [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a welcoming and inclusive environment. 
