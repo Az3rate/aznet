@@ -74,7 +74,13 @@ export class Terminal {
       this.updatePrompt();
       return;
     } else {
-      await this.commands.help();
+      // Use enhanced error handling for unknown commands
+      const { handleCommandError } = await import('./terminal-commands.js');
+      const errorMessage = handleCommandError(cmd, this.commands);
+      const { typeText } = await import('./terminal-ui.js');
+      await typeText(this, errorMessage, 'error');
+      this.updatePrompt();
+      return;
     }
   }
 
@@ -139,4 +145,28 @@ export class Terminal {
       this.scrollHandler.disconnect();
     }
   }
-} 
+}
+
+export const handleCommand = async (input, terminal) => {
+    logDebug('handleCommand called', { input });
+    
+    // Split input into command and arguments
+    const [command, ...args] = input.trim().split(/\s+/);
+    
+    // Check if command exists
+    if (terminal.commands[command]) {
+        try {
+            await terminal.commands[command](args);
+        } catch (error) {
+            logDebug('Command execution error', { error });
+            appendOutput(`Error executing command: ${error.message}`, 'error');
+        }
+    } else {
+        // Use enhanced error handling for unknown commands
+        const errorMessage = handleCommandError(command);
+        appendOutput(errorMessage, 'error');
+    }
+    
+    // Always append a new prompt
+    appendPrompt(terminal);
+}; 

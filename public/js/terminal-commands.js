@@ -116,4 +116,84 @@ export function terminalCommands(terminal) {
       }, 1000);
     }
   };
-} 
+}
+
+// Fuzzy matching function for command suggestions
+const fuzzyMatch = (input, command) => {
+    const inputLower = input.toLowerCase();
+    const commandLower = command.toLowerCase();
+    
+    // Exact match
+    if (inputLower === commandLower) return 1.0;
+    
+    // Starts with
+    if (commandLower.startsWith(inputLower)) return 0.9;
+    
+    // Contains
+    if (commandLower.includes(inputLower)) return 0.8;
+    
+    // Calculate Levenshtein distance
+    const distance = levenshteinDistance(inputLower, commandLower);
+    const maxLength = Math.max(inputLower.length, commandLower.length);
+    return 1 - (distance / maxLength);
+};
+
+// Levenshtein distance calculation
+const levenshteinDistance = (a, b) => {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+    
+    const matrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
+    
+    for (let i = 0; i <= a.length; i++) matrix[0][i] = i;
+    for (let j = 0; j <= b.length; j++) matrix[j][0] = j;
+    
+    for (let j = 1; j <= b.length; j++) {
+        for (let i = 1; i <= a.length; i++) {
+            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+            matrix[j][i] = Math.min(
+                matrix[j][i - 1] + 1,
+                matrix[j - 1][i] + 1,
+                matrix[j - 1][i - 1] + cost
+            );
+        }
+    }
+    
+    return matrix[b.length][a.length];
+};
+
+// Get command suggestions with fuzzy matching
+export const getCommandSuggestions = (input, commandsObj) => {
+    const commands = Object.keys(commandsObj);
+    const suggestions = commands
+        .map(cmd => ({
+            command: cmd,
+            score: fuzzyMatch(input, cmd)
+        }))
+        .filter(suggestion => suggestion.score > 0.3)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3);
+    
+    return suggestions;
+};
+
+// Enhanced command error handling
+export const handleCommandError = (input, commandsObj) => {
+    const suggestions = getCommandSuggestions(input, commandsObj);
+    if (suggestions.length > 0) {
+        const bestMatch = suggestions[0];
+        const otherMatches = suggestions.slice(1);
+        
+        let message = `Command not found: ${input}\n`;
+        message += `Did you mean: ${bestMatch.command}?\n`;
+        
+        if (otherMatches.length > 0) {
+            message += `Other possibilities: ${otherMatches.map(m => m.command).join(', ')}\n`;
+        }
+        
+        message += `\nType 'help' for a list of available commands.`;
+        return message;
+    }
+    
+    return `Command not found: ${input}\nType 'help' for a list of available commands.`;
+}; 

@@ -1,6 +1,11 @@
 # PLANNING.md
 
 ## Current Work in Progress
+- Added architecture diagrams for all projects as static images
+- Updated project data to include architectureImage fields
+- Details panel now displays architecture diagrams alongside project information
+- **Expected Behavior:** When viewing a project (via click or `cat` command), the details panel should show the project's architecture diagram if available
+- **User Action Required:** Please test by viewing any project (e.g., `cat d4ut` or `cat raidalert`) and confirm that the architecture diagram appears in the details panel
 - Refactored terminal.js into modular ES modules (terminal-core.js, terminal-commands.js, terminal-ui.js, terminal-details.js).
 - Updated the script tag in index.ejs to use type="module" for ES module support in the browser.
 - Fixed missing import of closeDetailsPanel in terminal-commands.js, which prevented the project details panel from opening when using the cat command.
@@ -35,17 +40,13 @@
 - All new features and tasks must be documented in TASK.md.
 - All code must be understandable to a mid-level developer, with comments for non-obvious logic.
 - Only use verified, well-supported Node.js and frontend libraries.
-- **The AI must always make all code, data, and config changes itself and never ask the user to do manual steps.**
+- The AI must always make all code, data, and config changes itself and never ask the user to do manual steps.
+- When moving to a new task, the AI must:
+  - Select the highest priority task from TASK.md
+  - Update TASK.md to reflect the new work
+  - Make all necessary code changes
+  - Provide clear testing instructions
+  - Never ask the user to make manual changes
 
 ### File Structure (Recommended)
-- `app.js` – Main server and data
-- `public/` – Static assets (css, js, images)
-- `views/` – EJS templates
-- `PLANNING.md` – Project plan (this file)
-- `TASK.md` – Task tracking
-- `.cursor/rules/my-rule.mdc` – Project rules
-
-### Future Considerations
-- Implement a virtual file system for advanced terminal emulation.
-- Add automated tests and CI/CD pipeline.
-- Expand documentation for contributors and users. 
+- `app.js`

@@ -19,9 +19,15 @@
   - [x] Panel is always visible
   - [x] Shows tree structure of virtual file system
   - [x] Visually indicates current directory (cd location) — Complete and working as intended
-- [ ] Ensure terminal autoscroll always works after output or suggestions
+- [x] Ensure terminal autoscroll always works after output or suggestions (2024-06-10)
 - [x] Refactor terminal output, prompt, and scroll management for robustness and glitch-free experience (Fixed input focus, prompt duplication, and autocomplete issues on 2024-06-09)
-- [ ] Review and refactor any file approaching 500 lines (Ongoing)
+- [x] Review and refactor any file approaching 500 lines (2024-06-10)
+  - [x] All modular files are under 150 lines
+- [x] Add error handling for missing images in details panel (2024-06-10)
+- [ ] Enhance error handling and suggestions for mistyped commands (In Progress)
+  - [ ] Add fuzzy matching for command suggestions
+  - [ ] Add "did you mean" suggestions for mistyped commands
+  - [ ] Add command usage examples in error messages
 - [ ] Add automated tests and CI/CD pipeline (Planned)
 - [ ] Expand documentation for contributors and users (Planned)
 
