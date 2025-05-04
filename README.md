@@ -18,6 +18,18 @@ npm test
 
 A GitHub Actions workflow is set up to automatically run all tests on every push and pull request to the `main` branch. See `.github/workflows/ci.yml` for details.
 
+## Project Structure & Architecture
+
+- **Backend:** Node.js with Express.js, serving EJS-rendered pages and static assets.
+- **Frontend:** EJS templates, custom JavaScript for terminal emulation, Tailwind CSS and custom CSS for styling.
+- **Data:** Project metadata is managed in a structured JavaScript object in `app.js`.
+- **Static Assets:** Located in `public/` (images, CSS, JS).
+- **Tests:** Located in `public/js/*.test.js` and run with Jest.
+
+## Reporting Issues & Requesting Features
+
+If you find a bug or have a feature request, please [open an issue](https://github.com/your-repo/issues) with a clear description and steps to reproduce or desired functionality. We welcome all feedback and suggestions!
+
 ## Contributors
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to get started, code style, and submitting pull requests. 

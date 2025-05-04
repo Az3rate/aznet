@@ -48,6 +48,8 @@
 - When moving to a new task, the AI must:
   - Select the highest priority task from TASK.md
   - Update TASK.md to reflect the new work
+  - Update PLANNING.md to reflect the new work
+  - Update README.md to reflect the new work
   - Make all necessary code changes
   - Provide clear testing instructions
   - Never ask the user to make manual changes
