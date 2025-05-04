@@ -30,6 +30,6 @@ A GitHub Actions workflow is set up to automatically run all tests on every push
 
 If you find a bug or have a feature request, please [open an issue](https://github.com/your-repo/issues) with a clear description and steps to reproduce or desired functionality. We welcome all feedback and suggestions!
 
-## Contributors
+## Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to get started, code style, and submitting pull requests. 
+This project is primarily a showcase of my work and abilities. While I am not actively seeking contributors, contributions are welcome if you are interested in trying something or improving the project. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. 
