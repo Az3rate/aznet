@@ -3,143 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aznet - Gaming Tools Portal</title>
-    <link href="/css/tailwind.css" rel="stylesheet">
-    <link href="/css/aznet-theme.css" rel="stylesheet">
-    <style>
-      body {
-        background: #000;
-        min-height: 100vh;
-        position: relative;
-      }
-      .aznet-list {
-        background: none;
-        max-width: 900px;
-        margin: 0 auto 3rem auto;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-      }
-      .aznet-card {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        background: rgba(0, 0, 0, 0.8);
-        border: 1px solid var(--color-primary);
-        overflow: hidden;
-        transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
-        min-height: 260px;
-        position: relative;
-        box-shadow: 0 0 10px var(--color-primary);
-      }
-      .aznet-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 20px var(--color-primary);
-        border-color: var(--color-secondary);
-      }
-      .aznet-card-img {
-        width: 320px;
-        min-width: 220px;
-        max-width: 340px;
-        object-fit: cover;
-        background: rgba(0, 0, 0, 0.8);
-        border-right: 1px solid var(--color-primary);
-        box-shadow: 0 0 10px var(--color-primary);
-        transition: filter 0.3s;
-        filter: brightness(0.98) contrast(1.08);
-      }
-      .aznet-card:hover .aznet-card-img {
-        filter: brightness(1.05) contrast(1.12) saturate(1.1);
-      }
-      .aznet-card-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 2.2rem 2.5rem;
-        min-width: 0;
-      }
-      .aznet-card-title {
-        color: var(--color-primary);
-        font-size: 2rem;
-        font-weight: 800;
-        margin-bottom: 0.5rem;
-        letter-spacing: 0.04em;
-        text-shadow: 0 0 10px var(--color-primary);
-      }
-      .aznet-card-desc {
-        color: var(--color-primary);
-        font-size: 1.1rem;
-        margin-bottom: 1.2rem;
-        line-height: 1.6;
-        text-shadow: 0 0 5px var(--color-primary);
-      }
-      .aznet-card-link {
-        display: inline-block;
-        background: var(--color-primary);
-        color: var(--color-body-dark);
-        font-weight: 700;
-        padding: 0.8rem 2.2rem;
-        border: 1px solid var(--color-primary);
-        transition: var(--transition);
-        text-decoration: none;
-        font-size: 1.1rem;
-        letter-spacing: 0.04em;
-        box-shadow: 0 0 10px var(--color-primary);
-      }
-      .aznet-card-link:hover {
-        background: var(--color-secondary);
-        color: var(--color-body-dark);
-        box-shadow: 0 0 15px var(--color-secondary);
-      }
-      @media (max-width: 900px) {
-        .aznet-list {
-          max-width: 100%;
-        }
-        .aznet-card {
-          flex-direction: column;
-          min-height: unset;
-        }
-        .aznet-card-img {
-          width: 100%;
-          max-width: 100%;
-          min-width: 0;
-          border-right: none;
-          border-bottom: 1px solid var(--color-primary);
-        }
-        .aznet-card-content {
-          padding: 1.5rem 1.2rem;
-        }
-      }
-    </style>
+    <title>AZNET - Terminal Interface</title>
+    <link rel="stylesheet" href="/css/terminal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="mbr-scanlines"></div>
-    <div class="mbr-scanline"></div>
-    <div class="mbr-flicker"></div>
-    
-    <%- include('partials/header', { currentPage: 'index' }) %>
-
-    <main class="aznet-list">
-        <% websites.forEach((website) => { %>
-            <div class="aznet-card">
-                <img src="<%= website.image %>" alt="<%= website.name %> screenshot" class="aznet-card-img">
-                <div class="aznet-card-content">
-                    <div class="aznet-card-title"><%= website.name %></div>
-                    <div class="aznet-card-desc"><%= website.description %></div>
-                    <a href="/project/<%= website.name.toLowerCase().replace(/\s+/g, '') %>" class="aznet-card-link">
-                        More info
-                    </a>
-                </div>
+    <div class="terminal-wrapper">
+        <div class="terminal">
+            <div class="window-controls">
+                <div class="window-control close"></div>
+                <div class="window-control minimize"></div>
+                <div class="window-control maximize"></div>
             </div>
-        <% }); %>
-    </main>
-
-    <footer class="mt-16 relative z-10" style="background: rgba(0, 0, 0, 0.8); max-width: 900px; margin: 0 auto 2rem auto; border: 1px solid var(--color-primary); box-shadow: 0 0 10px var(--color-primary);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <p class="text-center font-medium" style="color: var(--color-primary); text-shadow: 0 0 5px var(--color-primary);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
+            <div class="terminal-content">
+                <!-- Command/output history will be rendered here by JS -->
+            </div>
+            <div class="command-line">
+                <span class="prompt">visitor@aznet:~$</span>
+                <input type="text" class="command-input" autofocus>
+            </div>
         </div>
-    </footer>
+        <div id="details-panel"></div>
+    </div>
+    <script>
+      window.PROJECTS = <%- JSON.stringify(websites) %>;
+    </script>
+    <script src="/js/terminal.js"></script>
+    <audio id="terminal-audio" src="/audio/terminal-blip.mp3" preload="auto"></audio>
 </body>
 </html> 
