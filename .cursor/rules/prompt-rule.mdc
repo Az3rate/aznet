@@ -1,0 +1,9 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+- The prompt must always reflect the current directory or context.
+- Only one prompt should be visible at a time.
+- Prompt and input must be updated together after every command.
+- Always check and enforce this rule before making any changes to prompt or command handling.

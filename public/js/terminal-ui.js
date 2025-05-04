@@ -1,15 +1,20 @@
+import { logDebug } from './debug.js';
+
 export function appendPrompt(terminal) {
-  // Remove any existing input fields
-  const oldInputs = terminal.content.querySelectorAll('.command-input');
-  oldInputs.forEach(input => input.parentElement && input.parentElement.remove());
-  let promptDiv = document.createElement('div');
-  promptDiv.className = 'prompt-block';
-  promptDiv.innerHTML = `<span class="prompt">${terminal.prompt}</span> <input type="text" class="command-input" autofocus>`;
-  terminal.content.appendChild(promptDiv);
-  terminal.input = promptDiv.querySelector('.command-input');
-  terminal.input.focus();
-  if (typeof terminal.setupInputEventListeners === 'function') {
-    terminal.setupInputEventListeners();
+  logDebug('appendPrompt called', { terminal });
+  // Remove any existing input fields from .command-line
+  const commandLine = document.querySelector('.command-line');
+  if (commandLine) {
+    commandLine.innerHTML = '';
+    let promptDiv = document.createElement('div');
+    promptDiv.className = 'prompt-block';
+    promptDiv.innerHTML = `<span class="prompt">${terminal.prompt}</span> <input type="text" class="command-input" autofocus>`;
+    commandLine.appendChild(promptDiv);
+    terminal.input = promptDiv.querySelector('.command-input');
+    terminal.input.focus();
+    if (typeof terminal.setupInputEventListeners === 'function') {
+      terminal.setupInputEventListeners();
+    }
   }
   scrollToBottom(terminal);
 }
@@ -77,7 +82,33 @@ export function printCommand(terminal, command) {
 }
 
 export function scrollToBottom(terminal) {
+  logDebug('scrollToBottom called', { terminal });
+  // Use both requestAnimationFrame and setTimeout to ensure reliable scrolling
   requestAnimationFrame(() => {
     terminal.content.scrollTop = terminal.content.scrollHeight;
+    // Add a small delay to handle cases where content might still be rendering
+    setTimeout(() => {
+      terminal.content.scrollTop = terminal.content.scrollHeight;
+      logDebug('scrollToBottom: after setTimeout', { scrollTop: terminal.content.scrollTop, scrollHeight: terminal.content.scrollHeight });
+    }, 50);
   });
+}
+
+// Add new function to handle scroll events
+export function setupScrollHandler(terminal) {
+  // Create a ResizeObserver to detect content changes
+  const resizeObserver = new ResizeObserver(() => {
+    scrollToBottom(terminal);
+  });
+  
+  // Observe the terminal content
+  resizeObserver.observe(terminal.content);
+  
+  // Also observe the command input area
+  const commandLine = document.querySelector('.command-line');
+  if (commandLine) {
+    resizeObserver.observe(commandLine);
+  }
+  
+  return resizeObserver;
 } 

@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- Always read all relevant rules (terminal, style, prompt, etc.) before responding to any prompt or making any code changes.
+- Document all changes in TASK.md and PLANNING.md as appropriate.
+- Always proceed with the next logical step without waiting for user confirmation.
+- Ask for clarification only if context is missing or ambiguous.
+

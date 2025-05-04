@@ -2,6 +2,7 @@ import { typeText, printWelcome } from './terminal-ui.js';
 import { openDetailsPanel, closeDetailsPanel } from './terminal-details.js';
 import { fileSystem } from './file-system.js';
 import { renderDirectoryPanel } from './directory-panel.js';
+import { logDebug } from './debug.js';
 
 export function terminalCommands(terminal) {
   return {
@@ -58,7 +59,9 @@ export function terminalCommands(terminal) {
       await typeText(terminal, fileSystem.getPathString());
     },
     async cat(args) {
+      logDebug('cat command called', { args });
       if (!args || args.length === 0) {
+        logDebug('cat: no args');
         await typeText(terminal, 'Usage: cat <file>');
         return;
       }
@@ -66,12 +69,29 @@ export function terminalCommands(terminal) {
       const projects = window.PROJECTS || [];
       const argName = args[0].toLowerCase();
       const project = projects.find(p => p.name.toLowerCase() === argName);
+      logDebug('cat: project lookup', { argName, project });
       if (project) {
+        // Print the command first
+        const commandDiv = document.createElement('div');
+        commandDiv.className = 'command-block';
+        commandDiv.innerHTML = `
+          <div style="background:#232323;padding:18px 24px;border-radius:8px;margin-bottom:18px;">
+            <span class="prompt" style="color:#28c840;">visitor@aznet:~$</span>
+            <span>cat ${args[0]}</span>
+          </div>
+        `;
+        terminal.content.appendChild(commandDiv);
+        logDebug('cat: opening details panel', { project });
         openDetailsPanel(terminal, project);
+        setTimeout(() => {
+          logDebug('cat: scrollToBottom after openDetailsPanel');
+          scrollToBottom(terminal);
+        }, 100);
         return;
       }
       // Fallback to virtual file system
       const content = fileSystem.getFileContent(argName);
+      logDebug('cat: file system lookup', { argName, content });
       if (content === null) {
         await typeText(terminal, `cat: ${args[0]}: No such file`);
         return;

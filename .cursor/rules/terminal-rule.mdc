@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- The terminal input field must always be rendered at the bottom of the terminal window, outside the scrollable output area.
+- Only one input field should exist at a time.
+- All command output goes into the scrollable area; the input is rendered in a fixed container at the bottom.
+- Always check and enforce this rule before making any changes to terminal-related code.
+

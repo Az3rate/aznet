@@ -512,4 +512,65 @@ body {
 
 #details-panel {
   z-index: 10;
+}
+
+/* Add after .prompt-block or at the end of the file */
+.prompt-block {
+  display: flex;
+  align-items: center;
+  background: #232323;
+  border: 2px solid #28c840;
+  border-radius: 8px;
+  box-shadow: 0 0 8px #28c84044;
+  padding: 12px 18px;
+  margin-top: 32px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.prompt-block .prompt {
+  color: #28c840;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 12px;
+  text-shadow: 0 0 6px #28c84044;
+}
+
+.command-input {
+  background: #181818;
+  border: 2px solid #5f87ff;
+  border-radius: 6px;
+  color: #f0f0f0;
+  font-family: inherit;
+  font-size: 1.1em;
+  padding: 8px 14px;
+  outline: none;
+  box-shadow: 0 0 8px #5f87ff44;
+  transition: border 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 420px;
+}
+
+.command-input:focus {
+  border: 2px solid #28c840;
+  box-shadow: 0 0 16px #28c84088;
+}
+
+/* Ensure SVGs and images in the details panel are visible and styled */
+#details-panel img,
+#details-panel svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 1.2rem auto;
+  background: none;
+  box-shadow: 0 0 12px #222;
+  border-radius: 8px;
+}
+#details-panel svg[width] {
+  width: 100% !important;
+}
+#details-panel svg[height] {
+  height: auto !important;
 } 

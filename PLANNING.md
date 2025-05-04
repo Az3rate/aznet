@@ -6,6 +6,7 @@
 - Fixed missing import of closeDetailsPanel in terminal-commands.js, which prevented the project details panel from opening when using the cat command.
 - **Expected Behavior:** Clicking or typing `cat <project>` opens the project details panel on the right side as intended.
 - **User Action Required:** Please test by clicking or typing `cat lootmanager` (or another project). Confirm if the details panel opens as expected. If not, describe the result so we can inspect and resolve.
+- Terminal input field is now always rendered at the bottom, outside the scrollable output, for true terminal UX (2024-06-09).
 
 ## Project: AzNet Terminal Interface
 
@@ -26,6 +27,7 @@
 - Clear visual hierarchy, strong typography, and accessible color contrast.
 - Responsive design for desktop and mobile.
 - Professional, direct tone in all messaging and documentation.
+- Input field is always at the bottom, never scrolls away, and only one is present at a time (2024-06-09).
 
 ### Constraints
 - No file should exceed 500 lines; refactor into modules if necessary.
@@ -33,6 +35,7 @@
 - All new features and tasks must be documented in TASK.md.
 - All code must be understandable to a mid-level developer, with comments for non-obvious logic.
 - Only use verified, well-supported Node.js and frontend libraries.
+- **The AI must always make all code, data, and config changes itself and never ask the user to do manual steps.**
 
 ### File Structure (Recommended)
 - `app.js` – Main server and data

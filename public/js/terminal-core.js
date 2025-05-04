@@ -1,8 +1,9 @@
 // terminal-core.js
 import { terminalCommands } from './terminal-commands.js';
-import { appendPrompt, printWelcome, printCommand, scrollToBottom } from './terminal-ui.js';
+import { appendPrompt, printWelcome, printCommand, scrollToBottom, setupScrollHandler } from './terminal-ui.js';
 import { openDetailsPanel, closeDetailsPanel } from './terminal-details.js';
 import { fileSystem } from './file-system.js';
+import { logDebug } from './debug.js';
 
 export class Terminal {
   constructor() {
@@ -23,13 +24,16 @@ export class Terminal {
     this.input = document.querySelector('.command-input');
     this.detailsPanel = document.getElementById('details-panel');
     this.setupEventListeners();
+    this.scrollHandler = setupScrollHandler(this);
     printWelcome(this);
   }
 
   setupEventListeners() {
     this.content.addEventListener('click', (e) => {
+      logDebug('terminal-content click', { target: e.target });
       if (e.target.classList.contains('clickable-item')) {
         const cmd = e.target.getAttribute('data-cmd');
+        logDebug('clickable-item clicked', { cmd });
         this.input.value = cmd;
         this.executeCommand();
       } else {
@@ -54,6 +58,7 @@ export class Terminal {
   }
 
   async executeCommand() {
+    logDebug('executeCommand called', { value: this.input.value });
     const command = this.input.value.trim();
     if (!command) return;
     this.history.push(command);
@@ -63,6 +68,7 @@ export class Terminal {
     const audio = document.getElementById('terminal-audio');
     if (audio) { audio.currentTime = 0; audio.play(); }
     const [cmd, ...args] = command.split(' ');
+    logDebug('executeCommand dispatch', { cmd, args });
     if (this.commands[cmd]) {
       await this.commands[cmd](args);
       this.updatePrompt();
@@ -126,5 +132,11 @@ export class Terminal {
     this.input.addEventListener('input', () => {
       this.showAutoComplete();
     });
+  }
+
+  cleanup() {
+    if (this.scrollHandler) {
+      this.scrollHandler.disconnect();
+    }
   }
 } 

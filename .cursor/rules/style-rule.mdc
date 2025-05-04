@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- All UI elements must be visually clear, accessible, and consistent with the project's dark terminal-inspired theme.
+- The input field and prompt must be visually distinct and easy to find.
+- Use spacing, color, and borders to separate input from output.
+- Always check and enforce this rule before making any style or UX changes.
+

@@ -15,6 +15,7 @@ const websites = [
     description: 'Because nothing says "I love my guild" like meticulously tracking who got what loot. Keep your guild\'s loot drama to a minimum with advanced DKP tracking, raid scheduling, and loot distribution tools.',
     url: 'https://lootmanager.aznet.com',
     image: '/images/lootmanager.png',
+    architectureImage: '/images/loot-manager-mermaid.png',
     overview: 'A comprehensive guild management system specifically designed for Throne and Liberty, focusing on DKP (Dragon Kill Points) tracking, raid scheduling, and loot distribution. Built to handle the unique needs of T&L\'s guild system and progression mechanics.',
     keyFeatures: [
       'User Management: Authentication & Authorization, role-based access control, user profile management, guild selection and switching',
@@ -66,6 +67,7 @@ const websites = [
     description: 'Sleep soundly knowing your ARK base is being watched. Get real-time raid notifications, manage your tribe, and let Discord do the worrying for you.',
     url: 'https://raidalert.aznet.com',
     image: '/images/raidalert.png',
+    architectureImage: '/images/raid-alert-mermaid.png',
     overview: 'To protect ARK Survival Evolved bases by providing real-time raid notifications and tribe management through Discord. The system monitors server activity, tracks tribe resources, and alerts players of potential threats, helping tribes maintain their dominance in the harsh ARK environment.',
     keyFeatures: [
       'Discord Bot: Monitors Discord channels for tribe-related activity, supports multi-tribe configurations per guild, handles commands and button interactions, provides real-time alerts, and logs activity/errors for audit and troubleshooting.',
@@ -108,6 +110,7 @@ const websites = [
     description: 'Because sometimes you need more than just "big number go up". Optimize your Diablo 4 builds with actual math, item comparisons, and character planning that doesn\'t involve sacrificing goats.',
     url: 'https://d4ut.aznet.com',
     image: '/images/d4ut.png',
+    architectureImage: '/images/d4ut-mermaid.png',
     overview: 'A powerful web-based utility tool specifically designed for Diablo 4 players, offering advanced build optimization, damage calculations, and item comparison features. The tool helps players maximize their character\'s potential by analyzing stats, skills, and gear combinations.',
     keyFeatures: [
       'Character Optimization: Build calculations, stat analysis, gear optimization',
