@@ -1,5 +1,12 @@
 # PLANNING.md
 
+## Current Work in Progress
+- Refactored terminal.js into modular ES modules (terminal-core.js, terminal-commands.js, terminal-ui.js, terminal-details.js).
+- Updated the script tag in index.ejs to use type="module" for ES module support in the browser.
+- Fixed missing import of closeDetailsPanel in terminal-commands.js, which prevented the project details panel from opening when using the cat command.
+- **Expected Behavior:** Clicking or typing `cat <project>` opens the project details panel on the right side as intended.
+- **User Action Required:** Please test by clicking or typing `cat lootmanager` (or another project). Confirm if the details panel opens as expected. If not, describe the result so we can inspect and resolve.
+
 ## Project: AzNet Terminal Interface
 
 ### Architecture Overview
