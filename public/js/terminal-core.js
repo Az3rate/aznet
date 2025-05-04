@@ -1,6 +1,6 @@
 // terminal-core.js
 import { terminalCommands } from './terminal-commands.js';
-import { printWelcome, printPrompt, printCommand, scrollToBottom } from './terminal-ui.js';
+import { appendPrompt, printWelcome, printCommand, scrollToBottom } from './terminal-ui.js';
 import { openDetailsPanel, closeDetailsPanel } from './terminal-details.js';
 import { fileSystem } from './file-system.js';
 
@@ -23,25 +23,10 @@ export class Terminal {
     this.input = document.querySelector('.command-input');
     this.detailsPanel = document.getElementById('details-panel');
     this.setupEventListeners();
-    printWelcome(this).then(() => {
-      printPrompt(this);
-    });
+    printWelcome(this);
   }
 
   setupEventListeners() {
-    this.input.addEventListener('keydown', (e) => {
-      if (this.isProcessing) return;
-      if (e.key === 'Enter') {
-        this.executeCommand();
-      } else if (e.key === 'ArrowUp') {
-        this.navigateHistory('up');
-      } else if (e.key === 'ArrowDown') {
-        this.navigateHistory('down');
-      } else if (e.key === 'Tab') {
-        e.preventDefault();
-        this.autoComplete();
-      }
-    });
     this.content.addEventListener('click', (e) => {
       if (e.target.classList.contains('clickable-item')) {
         const cmd = e.target.getAttribute('data-cmd');
@@ -53,9 +38,6 @@ export class Terminal {
     });
     this.terminal.addEventListener('click', () => {
       this.input.focus();
-    });
-    this.input.addEventListener('input', () => {
-      this.showAutoComplete();
     });
     this.detailsPanel.addEventListener('click', (e) => {
       if (e.target.classList.contains('details-close-btn')) {
@@ -84,14 +66,10 @@ export class Terminal {
     if (this.commands[cmd]) {
       await this.commands[cmd](args);
       this.updatePrompt();
-      printPrompt(this);
-      scrollToBottom(this);
       return;
     } else {
       await this.commands.help();
     }
-    printPrompt(this);
-    scrollToBottom(this);
   }
 
   navigateHistory(direction) {
@@ -106,5 +84,47 @@ export class Terminal {
   }
 
   showAutoComplete() {}
-  autoComplete() {}
+  autoComplete() {
+    const inputValue = this.input.value;
+    const [cmd, ...args] = inputValue.trim().split(/\s+/);
+    if (!['cd', 'ls', 'cat'].includes(cmd)) return;
+    const partial = args[0] || '';
+    const items = fileSystem.listDirectory();
+    let candidates = [];
+    if (cmd === 'cd') {
+      candidates = items.filter(item => item.type === 'directory' && item.name.startsWith(partial));
+    } else {
+      candidates = items.filter(item => item.name.startsWith(partial));
+    }
+    if (candidates.length === 1) {
+      this.input.value = `${cmd} ${candidates[0].name}`;
+      this.input.focus();
+      scrollToBottom(this);
+    } else if (candidates.length > 1) {
+      const output = candidates.map(item => item.type === 'directory' ? item.name + '/' : item.name).join('    ');
+      printCommand(this, this.input.value);
+      this.input.value = inputValue;
+      this.content.innerHTML += `<div class='command-output'>${output}</div>`;
+      appendPrompt(this);
+    }
+  }
+
+  setupInputEventListeners() {
+    this.input.addEventListener('keydown', (e) => {
+      if (this.isProcessing) return;
+      if (e.key === 'Enter') {
+        this.executeCommand();
+      } else if (e.key === 'ArrowUp') {
+        this.navigateHistory('up');
+      } else if (e.key === 'ArrowDown') {
+        this.navigateHistory('down');
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        this.autoComplete();
+      }
+    });
+    this.input.addEventListener('input', () => {
+      this.showAutoComplete();
+    });
+  }
 } 

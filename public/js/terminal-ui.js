@@ -1,3 +1,19 @@
+export function appendPrompt(terminal) {
+  // Remove any existing input fields
+  const oldInputs = terminal.content.querySelectorAll('.command-input');
+  oldInputs.forEach(input => input.parentElement && input.parentElement.remove());
+  let promptDiv = document.createElement('div');
+  promptDiv.className = 'prompt-block';
+  promptDiv.innerHTML = `<span class="prompt">${terminal.prompt}</span> <input type="text" class="command-input" autofocus>`;
+  terminal.content.appendChild(promptDiv);
+  terminal.input = promptDiv.querySelector('.command-input');
+  terminal.input.focus();
+  if (typeof terminal.setupInputEventListeners === 'function') {
+    terminal.setupInputEventListeners();
+  }
+  scrollToBottom(terminal);
+}
+
 export async function printWelcome(terminal) {
   const projects = window.PROJECTS || [];
   let welcomeText = `\n`;
@@ -25,17 +41,18 @@ export async function printWelcome(terminal) {
   const div = document.createElement('div');
   div.innerHTML = welcomeText;
   terminal.content.appendChild(div);
+  appendPrompt(terminal);
   scrollToBottom(terminal);
 }
 
-export async function typeText(terminal, text, className = '', clickableMap = {}) {
+export async function typeText(terminal, text, className = '', clickableMap = null) {
   terminal.isProcessing = true;
   const lines = text.split('\n');
   for (const line of lines) {
     const div = document.createElement('div');
     div.className = className;
     let html = line;
-    for (const [token, cmd] of Object.entries(clickableMap)) {
+    for (const [token, cmd] of Object.entries(clickableMap || {})) {
       const regex = new RegExp(token, 'g');
       html = html.replace(regex, `<span class='clickable-item' data-cmd="${cmd}">${token}</span>`);
     }
@@ -43,7 +60,7 @@ export async function typeText(terminal, text, className = '', clickableMap = {}
     terminal.content.appendChild(div);
     terminal.content.appendChild(document.createElement('br'));
   }
-  scrollToBottom(terminal);
+  appendPrompt(terminal);
   terminal.isProcessing = false;
 }
 
@@ -60,10 +77,7 @@ export function printCommand(terminal, command) {
 }
 
 export function scrollToBottom(terminal) {
-  terminal.content.scrollTop = terminal.content.scrollHeight;
-}
-
-export function printPrompt(terminal) {
-  terminal.prompt.textContent = `visitor@aznet:${terminal.currentDirectory}$`;
-  terminal.input.focus();
+  requestAnimationFrame(() => {
+    terminal.content.scrollTop = terminal.content.scrollHeight;
+  });
 } 

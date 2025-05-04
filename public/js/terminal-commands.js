@@ -10,9 +10,7 @@ export function terminalCommands(terminal) {
       await typeText(terminal, helpText);
     },
     clear() {
-      printWelcome(terminal).then(() => {
-        terminal.printPrompt();
-      });
+      printWelcome(terminal);
     },
     async about() {
       const aboutText = `\nAZNET - Terminal Interface\nVersion: 1.0.0\nCreated with ❤️ by Hugo Villeneuve\n\nHi, I'm Hugo! I build tools for gamers and devs who want more than just pretty interfaces.\nThis is a modern terminal-style interface for the AzNet community.\nNavigate through our content using terminal commands or by clicking the menu.\n    `;
