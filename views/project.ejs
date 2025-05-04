@@ -3,18 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= project.name %> | Aznet</title>
+    <title>Aznet - <%= project.name %></title>
     <link href="/css/tailwind.css" rel="stylesheet">
     <link href="/css/aznet-theme.css" rel="stylesheet">
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+      mermaid.initialize({ 
+        startOnLoad: true, 
+        theme: 'dark',
+        themeVariables: {
+          'primaryColor': '#00ff00',
+          'primaryTextColor': '#00ff00',
+          'primaryBorderColor': '#00ff00',
+          'lineColor': '#00ff00',
+          'secondaryColor': '#00ffff',
+          'tertiaryColor': '#000000'
+        }
+      });
     </script>
     <style>
+      body {
+        background: #000;
+        min-height: 100vh;
+        position: relative;
+      }
       .project-container {
-        background: var(--color-900);
-        border-radius: var(--radius-double);
-        box-shadow: var(--shadow);
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--color-primary);
+        box-shadow: 0 0 10px var(--color-primary);
         max-width: 900px;
         margin: 3rem auto 3rem auto;
         padding: 2.5rem 2rem 2rem 2rem;
@@ -25,16 +41,17 @@
         font-weight: 900;
         letter-spacing: 0.08em;
         margin-bottom: 0.5rem;
+        font-family: 'Courier New', 'Lucida Console', monospace;
+        text-shadow: 0 0 10px var(--color-primary);
       }
       .project-img {
         width: 100%;
         max-width: 600px;
-        border-radius: var(--radius);
         margin: 2rem auto 2rem auto;
         display: block;
-        box-shadow: 0 4px 24px 0 #00000022;
-        border: 2px solid var(--color-primary);
-        background: var(--color-800);
+        border: 1px solid var(--color-primary);
+        box-shadow: 0 0 10px var(--color-primary);
+        background: rgba(0, 0, 0, 0.8);
       }
       .project-section-title {
         color: var(--color-primary);
@@ -43,12 +60,18 @@
         margin-top: 2rem;
         margin-bottom: 0.5rem;
         letter-spacing: 0.04em;
+        font-family: 'Courier New', 'Lucida Console', monospace;
+        text-shadow: 0 0 10px var(--color-primary);
+        border-bottom: 1px solid var(--color-primary);
+        padding-bottom: 0.5rem;
       }
       .project-desc {
-        color: var(--color-200);
+        color: var(--color-primary);
         font-size: 1.1rem;
         margin-bottom: 1.2rem;
         line-height: 1.6;
+        text-shadow: 0 0 5px var(--color-primary);
+        font-family: 'Courier New', 'Lucida Console', monospace;
       }
       .project-back {
         display: inline-block;
@@ -57,29 +80,34 @@
         color: var(--color-body-dark);
         font-weight: 700;
         padding: 0.5rem 1.5rem;
-        border-radius: var(--radius);
         text-decoration: none;
         transition: var(--transition);
+        font-family: 'Courier New', 'Lucida Console', monospace;
+        border: 1px solid var(--color-primary);
+        box-shadow: 0 0 10px var(--color-primary);
       }
       .project-back:hover {
         background: var(--color-secondary);
-        color: var(--color-900);
+        color: var(--color-body-dark);
+        box-shadow: 0 0 15px var(--color-secondary);
       }
       .mermaid {
-        background: var(--color-800);
-        border-radius: var(--radius);
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--color-primary);
+        box-shadow: 0 0 10px var(--color-primary);
         margin: 2rem auto;
         padding: 1.5rem 0.5rem;
-        box-shadow: 0 2px 12px 0 #00000022;
         max-width: 100%;
         overflow-x: auto;
       }
       .project-section-list {
-        color: var(--color-200);
+        color: var(--color-primary);
         font-size: 1.05rem;
         margin-bottom: 1.2rem;
         line-height: 1.7;
         padding-left: 1.5rem;
+        text-shadow: 0 0 5px var(--color-primary);
+        font-family: 'Courier New', 'Lucida Console', monospace;
       }
       .project-section-list li {
         margin-bottom: 0.5rem;
@@ -88,40 +116,41 @@
         width: 100%;
         border-collapse: collapse;
         margin: 1.5rem 0;
-        background: var(--color-800);
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: 0 2px 12px 0 #00000022;
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--color-primary);
+        box-shadow: 0 0 10px var(--color-primary);
       }
       .project-api-table th, .project-api-table td {
         padding: 0.7rem 1rem;
-        border-bottom: 1px solid var(--color-700);
-        color: var(--color-200);
+        border-bottom: 1px solid var(--color-primary);
+        color: var(--color-primary);
         text-align: left;
+        font-family: 'Courier New', 'Lucida Console', monospace;
+        text-shadow: 0 0 5px var(--color-primary);
       }
       .project-api-table th {
-        color: var(--color-primary);
         font-weight: 700;
-        background: var(--color-900);
+        background: rgba(0, 0, 0, 0.8);
       }
       .project-api-table tr:last-child td {
         border-bottom: none;
       }
+      code {
+        color: var(--color-primary);
+        text-shadow: 0 0 5px var(--color-primary);
+        font-family: 'Courier New', 'Lucida Console', monospace;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 0.2rem 0.4rem;
+        border: 1px solid var(--color-primary);
+      }
     </style>
 </head>
 <body>
-    <header class="shadow-2xl relative z-10" style="background: var(--color-900);">
-        <div class="max-w-2xl mx-auto px-4 py-8 flex flex-col items-center">
-            <a href="/" style="text-decoration:none;"><span class="aznet-logo">AZNET</span></a>
-            <div class="aznet-banner-bar"></div>
-            <span class="aznet-subtitle">Your Gaming Tools Hub</span>
-        </div>
-        <nav class="aznet-nav">
-            <a href="/">Projects</a>
-            <a href="/about">About Me</a>
-            <a href="mailto:aznettechnicalservices@gmail.com" class="hire">Hire Me</a>
-        </nav>
-    </header>
+    <div class="mbr-scanlines"></div>
+    <div class="mbr-scanline"></div>
+    <div class="mbr-flicker"></div>
+
+    <%- include('partials/header', { currentPage: 'project' }) %>
 
     <main class="project-container">
         <a href="/" class="project-back">← Back to Projects</a>
@@ -300,9 +329,9 @@
         <% } %>
     </main>
 
-    <footer class="mt-16 relative z-10" style="background: var(--color-900); border-radius: var(--radius-double); max-width: 900px; margin: 0 auto 2rem auto;">
+    <footer class="mt-16 relative z-10" style="background: rgba(0, 0, 0, 0.8); max-width: 900px; margin: 0 auto 2rem auto; border: 1px solid var(--color-primary); box-shadow: 0 0 10px var(--color-primary);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <p class="text-center font-medium" style="color: var(--color-300);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
+            <p class="text-center font-medium" style="color: var(--color-primary); text-shadow: 0 0 5px var(--color-primary);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
         </div>
     </footer>
 </body>

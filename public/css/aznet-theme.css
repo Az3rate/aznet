@@ -9,60 +9,176 @@
     --color-700: #3e4c59;
     --color-800: #323f4b;
     --color-900: #1f2933;
-    --color-primary: #1adeca;
-    --color-primary-dark: #0f8377;
-    --color-secondary: #efc9a3;
-    --color-body: var(--color-100);
-    --color-body-dark: var(--color-900);
-    --color-light: var(--color-50);
-    --color-link: var(--color-primary);
-    --color-headings: var(--color-secondary);
-    --color-border: var(--color-800);
-    --radius: 1rem;
-    --radius-double: 2rem;
-    --shadow: 0 0 2rem #00000026;
+    --color-primary: #00ff00;
+    --color-primary-dark: #00cc00;
+    --color-secondary: #00ffff;
+    --color-body: #00ff00;
+    --color-body-dark: #000000;
+    --color-light: #00ff00;
+    --color-link: #00ffff;
+    --color-headings: #00ff00;
+    --color-border: #00ff00;
+    --radius: 0;
+    --radius-double: 0;
+    --shadow: 0 0 2rem #00ff0026;
     --transition: all 0.3s ease-out;
-    --font-family: 'Hack Nerd Font', 'Trispace', monospace, sans-serif;
+    --font-family: 'Courier New', 'Lucida Console', monospace;
+}
+
+/* MBR Style Effects */
+.mbr-flicker {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.1);
+    animation: mbrFlicker 0.15s infinite;
+    pointer-events: none;
+}
+
+.mbr-scanline {
+    position: fixed;
+    pointer-events: none;
+    top: 0%;
+    width: 100%;
+    height: 1px;
+    z-index: 1;
+    background: #00ff00;
+    opacity: 0.5;
+    animation: mbrScanline 6s linear infinite;
+}
+
+.mbr-scanlines {
+    position: fixed;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(rgba(0, 255, 0, 0) 50%, rgba(0, 255, 0, 0.1) 50%),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.1), rgba(0, 255, 255, 0.05), rgba(0, 255, 0, 0.1));
+    background-size: 100% 2px, 3px 100%;
+}
+
+@keyframes mbrFlicker {
+    0% { opacity: 0.97; }
+    5% { opacity: 0.9; }
+    10% { opacity: 0.95; }
+    15% { opacity: 0.98; }
+    20% { opacity: 0.99; }
+    25% { opacity: 0.96; }
+    30% { opacity: 0.94; }
+    35% { opacity: 0.95; }
+    40% { opacity: 0.93; }
+    45% { opacity: 0.96; }
+    50% { opacity: 0.98; }
+    55% { opacity: 0.99; }
+    60% { opacity: 0.97; }
+    65% { opacity: 0.95; }
+    70% { opacity: 0.96; }
+    75% { opacity: 0.98; }
+    80% { opacity: 0.99; }
+    85% { opacity: 0.97; }
+    90% { opacity: 0.95; }
+    95% { opacity: 0.96; }
+    100% { opacity: 0.98; }
+}
+
+@keyframes mbrScanline {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
+/* Apply MBR effects to specific elements */
+.website-card {
+    border: 1px solid var(--color-primary);
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px var(--color-primary);
+    position: relative;
+    z-index: 2;
+}
+
+.website-card:hover {
+    box-shadow: 0 0 20px var(--color-primary);
+    border-color: var(--color-secondary);
+}
+
+.website-card-title {
+    text-shadow: 0 0 5px var(--color-primary);
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 2;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: #000;
+    position: relative;
+    z-index: 2;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 255, 0, 0.3);
+    background-color: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+}
+
+* {
+    scrollbar-color: var(--color-primary) #000;
+    scrollbar-width: thin;
 }
 
 body {
-    background: var(--color-body-dark);
-    color: var(--color-body);
+    background: #101c14;
+    color: #baffc9;
     font-family: var(--font-family);
     font-size: 1.6rem;
     line-height: 1.5;
+    text-shadow: 0 0 2px #baffc9, 0 0 8px #16241c;
+    position: relative;
+    z-index: 2;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: var(--color-headings);
+    color: var(--color-primary);
     font-size: 120%;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1rem;
+    text-shadow: 0 0 5px var(--color-primary);
+    position: relative;
+    z-index: 2;
 }
 
 a {
     color: var(--color-link);
     transition: var(--transition);
+    text-shadow: 0 0 5px var(--color-link);
+    position: relative;
+    z-index: 2;
 }
 
 a:hover {
     text-decoration: none;
     color: var(--color-secondary);
+    text-shadow: 0 0 10px var(--color-secondary);
 }
 
 .website-card {
     background: var(--color-800);
     border-radius: var(--radius-double);
     box-shadow: var(--shadow);
-    transition: var(--transition);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--color-border);
     overflow: hidden;
     position: relative;
 }
 
 .website-card:hover {
-    transform: translateY(-8px) scale(1.03);
+    transform: translateY(-8px) scale(1.05);
     box-shadow: 0 0 3rem var(--color-primary-dark), var(--shadow);
     border-color: var(--color-primary);
 }
@@ -74,7 +190,12 @@ a:hover {
     border-top-left-radius: var(--radius-double);
     border-top-right-radius: var(--radius-double);
     border-bottom: 2px solid var(--color-primary);
-    transition: var(--transition);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.website-card:hover .website-card-image {
+    transform: scale(1.15);
 }
 
 .website-card-content {
@@ -109,4 +230,188 @@ a:hover {
 .website-card-link:hover {
     background: var(--color-secondary);
     color: var(--color-900);
+}
+
+.aznet-logo {
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: 2.3rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #eaffea;
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-shadow: 0 0 8px #00ff99, 0 0 2px #fff, 0 0 1px #baffc9;
+  filter: brightness(1.1) drop-shadow(0 0 6px #00ff99);
+  transition: text-shadow 0.2s, filter 0.2s;
+}
+.aznet-banner-bar {
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0 10px var(--color-primary);
+}
+.aznet-subtitle {
+  color: #eaffea;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  margin-top: 0.2rem;
+  text-shadow: 0 0 4px #baffc9, 0 0 2px #fff;
+}
+.aznet-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.aznet-nav a {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.3rem 1.2rem;
+  transition: var(--transition);
+  background: none;
+  border: 1px solid var(--color-primary);
+  outline: none;
+  display: inline-block;
+  text-shadow: 0 0 5px var(--color-primary);
+}
+.aznet-nav a.active, .aznet-nav a:hover {
+  background: var(--color-primary);
+  color: var(--color-body-dark);
+  box-shadow: 0 0 10px var(--color-primary);
+}
+.aznet-nav a.hire {
+  background: var(--color-secondary);
+  color: var(--color-body-dark);
+  font-weight: 800;
+  margin-left: 1.5rem;
+  box-shadow: 0 0 10px var(--color-secondary);
+}
+.aznet-nav a.hire:hover {
+  background: var(--color-primary);
+  color: var(--color-body-dark);
+  box-shadow: 0 0 15px var(--color-primary);
+}
+
+/* --- AZNET HEADER & NAV --- */
+.aznet-header {
+  position: relative;
+  z-index: 10;
+  background: rgba(16, 28, 20, 0.92);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 32px 0 #00ff99, 0 2px 32px 0 #101c14;
+  border-bottom: 2px solid #39ff14;
+}
+.aznet-header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 1.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+.aznet-logo-link {
+  text-decoration: none;
+  margin-bottom: 0.2rem;
+}
+.aznet-logo {
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-shadow: 0 0 16px var(--color-primary), 0 0 2px #fff;
+  filter: brightness(1.2) drop-shadow(0 0 8px var(--color-primary));
+  transition: text-shadow 0.2s, filter 0.2s;
+}
+.aznet-logo-link:hover .aznet-logo {
+  text-shadow: 0 0 32px var(--color-secondary), 0 0 2px #fff;
+  filter: brightness(1.5) drop-shadow(0 0 16px var(--color-secondary));
+}
+.aznet-subtitle {
+  color: #eaffea;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  margin-bottom: 0.2rem;
+  text-shadow: 0 0 8px var(--color-secondary), 0 0 2px #fff;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  text-align: center;
+}
+.aznet-header-bar {
+  width: 100vw;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #00ff99 40%, #39ff14 60%, transparent 100%);
+  box-shadow: 0 0 8px #00ff99, 0 0 4px #39ff14;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
+}
+.aznet-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 0.7rem;
+  flex-wrap: wrap;
+}
+.aznet-nav-btn {
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #baffc9;
+  background: rgba(16,28,20,0.85);
+  border: 2px solid #00ff99;
+  border-radius: 999px;
+  padding: 0.45rem 1.7rem;
+  margin: 0 0.1rem;
+  text-decoration: none;
+  box-shadow: 0 0 6px #00ff99, 0 0 1px #fff;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+  outline: none;
+  position: relative;
+  z-index: 2;
+}
+.aznet-nav-btn.active, .aznet-nav-btn:hover, .aznet-nav-btn:focus {
+  background: #eaffea;
+  color: #16241c;
+  box-shadow: 0 0 16px #00ff99, 0 0 4px #39ff14;
+  border: 2px solid #39ff14;
+}
+.aznet-nav-btn.hire {
+  background: #39ff14;
+  color: #16241c;
+  font-weight: 900;
+  border: 2px solid #00ff99;
+  box-shadow: 0 0 12px #39ff14, 0 0 2px #fff;
+}
+.aznet-nav-btn.hire:hover, .aznet-nav-btn.hire:focus {
+  background: #eaffea;
+  color: #16241c;
+  border: 2px solid #00ff99;
+  box-shadow: 0 0 24px #00ff99, 0 0 8px #39ff14;
+}
+@media (max-width: 600px) {
+  .aznet-header-inner {
+    padding: 1.2rem 0.5rem 0.7rem 0.5rem;
+  }
+  .aznet-logo {
+    font-size: 1.5rem;
+  }
+  .aznet-subtitle {
+    font-size: 0.98rem;
+  }
+  .aznet-nav {
+    gap: 0.5rem;
+  }
+  .aznet-nav-btn {
+    font-size: 0.98rem;
+    padding: 0.35rem 1.1rem;
+  }
 } 

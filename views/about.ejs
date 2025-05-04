@@ -3,121 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Hugo Villeneuve | Aznet</title>
+    <title>Aznet - About Me</title>
     <link href="/css/tailwind.css" rel="stylesheet">
     <link href="/css/aznet-theme.css" rel="stylesheet">
     <style>
+      body {
+        background: #000;
+        min-height: 100vh;
+        position: relative;
+      }
       .about-container {
-        background: var(--color-900);
-        border-radius: var(--radius-double);
-        box-shadow: var(--shadow);
-        max-width: 700px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid var(--color-primary);
+        box-shadow: 0 0 10px var(--color-primary);
+        max-width: 900px;
         margin: 3rem auto 3rem auto;
         padding: 2.5rem 2rem 2rem 2rem;
       }
       .about-title {
+        font-family: 'Courier New', 'Lucida Console', monospace;
         color: var(--color-primary);
-        font-size: 2.2rem;
+        font-size: 2.4rem;
         font-weight: 900;
         letter-spacing: 0.08em;
         margin-bottom: 0.5rem;
+        text-shadow: 0 0 10px var(--color-primary);
       }
       .about-section-title {
         color: var(--color-primary);
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         font-weight: 700;
         margin-top: 2rem;
         margin-bottom: 0.5rem;
         letter-spacing: 0.04em;
+        text-shadow: 0 0 10px var(--color-primary);
+      }
+      .about-desc {
+        color: var(--color-primary);
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.6;
+        text-shadow: 0 0 5px var(--color-primary);
+      }
+      .about-back {
+        display: inline-block;
+        margin-bottom: 2rem;
+        background: var(--color-primary);
+        color: var(--color-body-dark);
+        font-weight: 700;
+        padding: 0.5rem 1.5rem;
+        border: 1px solid var(--color-primary);
+        text-decoration: none;
+        transition: var(--transition);
+        box-shadow: 0 0 10px var(--color-primary);
+      }
+      .about-back:hover {
+        background: var(--color-secondary);
+        color: var(--color-body-dark);
+        box-shadow: 0 0 15px var(--color-secondary);
       }
       .about-list {
-        margin-bottom: 1.5rem;
-        color: var(--color-200);
-        font-size: 1rem;
-        padding-left: 1.2rem;
+        color: var(--color-primary);
+        font-size: 1.05rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.7;
+        padding-left: 1.5rem;
+        text-shadow: 0 0 5px var(--color-primary);
       }
       .about-list li {
         margin-bottom: 0.5rem;
       }
       .about-contact {
+        color: var(--color-primary);
+        text-shadow: 0 0 5px var(--color-primary);
+        border: 1px solid var(--color-primary);
+        padding: 1rem;
         margin-top: 2rem;
-        color: var(--color-400);
-        font-size: 1rem;
+        box-shadow: 0 0 10px var(--color-primary);
       }
-      .about-projects-note {
-        margin-top: 2rem;
-        color: var(--color-200);
-        font-size: 1.1rem;
-        font-style: italic;
+      .about-contact a {
+        color: var(--color-secondary);
+        text-shadow: 0 0 5px var(--color-secondary);
       }
-      .aznet-nav {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin: 0.5rem 0 1.5rem 0;
-      }
-      .aznet-nav a {
-        color: var(--color-link);
-        font-weight: 700;
-        text-decoration: none;
-        font-size: 1.1rem;
-        padding: 0.3rem 1.2rem;
-        border-radius: var(--radius);
-        transition: var(--transition);
-      }
-      .aznet-nav a.active, .aznet-nav a:hover {
-        background: var(--color-primary);
-        color: var(--color-body-dark);
+      .about-contact a:hover {
+        color: var(--color-primary);
+        text-shadow: 0 0 10px var(--color-primary);
       }
     </style>
 </head>
 <body>
-    <header class="shadow-2xl relative z-10" style="background: var(--color-900);">
-        <div class="max-w-2xl mx-auto px-4 py-8 flex flex-col items-center">
-            <a href="/" style="text-decoration:none;"><span class="aznet-logo">AZNET</span></a>
-            <div class="aznet-banner-bar"></div>
-            <span class="aznet-subtitle">Your Gaming Tools Hub</span>
-        </div>
-        <nav class="aznet-nav">
-            <a href="/" >Home</a>
-            <a href="/about" class="active">About</a>
-        </nav>
-    </header>
+    <div class="mbr-scanlines"></div>
+    <div class="mbr-scanline"></div>
+    <div class="mbr-flicker"></div>
+
+    <%- include('partials/header', { currentPage: 'about' }) %>
 
     <main class="about-container">
-        <div class="about-title">About Me</div>
-        <p style="color:var(--color-200);margin-bottom:1.5rem;">
-            Hi, I'm Hugo Villeneuve. I'm passionate about building things that make life easier for others—especially in the world of technology and gaming. My background is in IT solutions, automation, and cloud-based systems, but what really drives me is solving real-world problems and helping teams work smarter.
-        </p>
-        <p style="color:var(--color-200);margin-bottom:1.5rem;">
-            The projects you see on Aznet are my personal freelance creations, built during the gaps between my professional contracts. They're a reflection of my curiosity, my love for learning, and my desire to give back to the communities I'm part of. Whether it's a tool for gamers or a system to streamline workflows, I enjoy turning ideas into practical, reliable solutions.
-        </p>
-        <div class="about-section-title">What I Do Best</div>
+        <a href="/" class="about-back">← Back to Projects</a>
+        <div class="about-title">About Hugo Villeneuve</div>
+        <div class="about-desc">
+            I build tools that solve real problems, not just pretty interfaces. My projects come from actual pain points I've experienced in gaming and development. If you're looking for another to-do app or weather widget, you're in the wrong place.
+        </div>
+
+        <div class="about-section-title">Background</div>
+        <div class="about-desc">
+            I've been building things since I was old enough to break them. My approach is simple: if something's annoying me, I'll build a tool to fix it. That's how most of my projects start - from real problems that need real solutions.
+        </div>
+
+        <div class="about-section-title">Skills</div>
         <ul class="about-list">
-            <li>Designing and automating IT and cloud infrastructure</li>
-            <li>Developing tools and web apps for productivity and gaming</li>
-            <li>Bridging the gap between business needs and technical solutions</li>
-            <li>Collaborating with teams and stakeholders to deliver results</li>
-            <li>Always learning, always improving</li>
+            <li>IT Infrastructure - Because someone has to keep the lights on</li>
+            <li>Problem Solving - I break things, then I fix them (usually)</li>
+            <li>Automation - If I have to do it more than once, I'll write a script</li>
+            <li>Gaming - I play games so you don't have to build the same tools I do</li>
         </ul>
+
         <div class="about-section-title">Languages</div>
         <ul class="about-list">
-            <li>French (Native)</li>
-            <li>English (Proficient)</li>
+            <li>JavaScript/TypeScript - For when I need to build something quickly</li>
+            <li>Python - For when I need to process data or automate something</li>
+            <li>Bash - For when I need to make the computer do my bidding</li>
         </ul>
-        <div class="about-contact">
-            <div>📧 aznettechnicalservices@gmail.com</div>
-            <div>🔗 <a href="https://www.linkedin.com/in/hugo-villeneuve-15410b162" target="_blank" style="color:var(--color-link);">LinkedIn</a></div>
+
+        <div class="about-section-title">Why Aznet?</div>
+        <div class="about-desc">
+            I build tools I actually use. If I'm not using it, I'm not building it. That means you get tools that solve real problems, not just pretty interfaces. And no, I won't build you a to-do app.
         </div>
-        <div class="about-projects-note">
-            <strong>Why Aznet?</strong><br>
-            Aznet is my creative outlet—a place to share the freelance projects I build for fun, for learning, and for the challenge. If you find something useful here, or want to collaborate, feel free to reach out!
+
+        <div class="about-contact">
+            <p>Want to work together? <a href="mailto:aznettechnicalservices@gmail.com">Email me</a> or find me on <a href="https://www.linkedin.com/in/hugo-villeneuve-aznet">LinkedIn</a>.</p>
         </div>
     </main>
 
-    <footer class="mt-16 relative z-10" style="background: var(--color-900); border-radius: var(--radius-double); max-width: 700px; margin: 0 auto 2rem auto;">
+    <footer class="mt-16 relative z-10" style="background: rgba(0, 0, 0, 0.8); max-width: 900px; margin: 0 auto 2rem auto; border: 1px solid var(--color-primary); box-shadow: 0 0 10px var(--color-primary);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <p class="text-center font-medium" style="color: var(--color-300);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
+            <p class="text-center font-medium" style="color: var(--color-primary); text-shadow: 0 0 5px var(--color-primary);">© <%= new Date().getFullYear() %> Aznet - All rights reserved</p>
         </div>
     </footer>
 </body>
