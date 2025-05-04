@@ -1,0 +1,779 @@
+/* Claude Terminal Interface - Accurate Theme */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.terminal-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+  background: #ffffff;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.directory-panel,
+#directory-panel {
+  width: 280px;
+  min-width: 280px;
+  max-width: 320px;
+  background: #f8fafc !important;
+  border-right: 1px solid #e5e7eb !important;
+  padding: 16px 0;
+  height: 100vh;
+  margin-top: 0;
+  overflow-y: auto;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  color: #374151 !important;
+}
+
+.directory-tree-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827 !important;
+  padding: 16px 24px;
+  margin-bottom: 8px;
+}
+
+.directory-tree {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.directory-tree ul {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.directory-tree-item {
+  padding: 6px 12px 6px 24px;
+  color: #4b5563 !important;
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent !important;
+}
+
+.directory-tree-item:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+.directory-tree-item.active {
+  background-color: #ddd6fe !important;
+  border-left-color: #7c3aed !important;
+  color: #7c3aed !important;
+  font-weight: 500;
+}
+
+.terminal {
+  flex: 1 1 auto;
+  background: #ffffff;
+  padding: 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  height: 100vh;
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: none;
+  transition: width 0.3s ease;
+}
+
+.terminal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #111827;
+}
+
+.command-line {
+  padding: 12px 0;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+#details-panel {
+  width: 0;
+  opacity: 0;
+  background: #ffffff;
+  color: #111827;
+  border-left: 1px solid #e5e7eb;
+  min-height: 100vh;
+  max-height: 100vh;
+  margin-top: 0;
+  margin-right: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: inherit;
+  height: 100vh;
+  outline: none !important;
+  z-index: 10;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-wrapper.terminal-shifted .terminal {
+  width: calc(100% - 720px);
+}
+
+.terminal-wrapper.terminal-shifted #details-panel {
+  width: 480px;
+  opacity: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.prompt {
+  color: #7c3aed;
+  font-weight: 500;
+  margin-right: 10px;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.command-input,
+.command-input-terminal {
+  background: none;
+  border: none;
+  color: #111827;
+  font-family: inherit;
+  font-size: 15px;
+  width: calc(100% - 150px);
+  outline: none;
+  caret-color: #7c3aed;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.command-input:focus,
+.command-input-terminal:focus {
+  outline: none;
+}
+
+.terminal-line {
+  color: #111827;
+  font-size: 15px;
+  margin-bottom: 8px;
+  animation: output-fadein 0.15s ease;
+}
+
+.command-block {
+  background: #f9fafb;
+  border-left: 3px solid #7c3aed;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  color: #111827;
+  padding: 12px 16px;
+  font-size: 15px;
+  animation: output-fadein 0.15s ease;
+}
+
+.command-block > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #111827;
+}
+
+.command-block span {
+  color: #111827;
+}
+
+.details-close-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.15s;
+  padding: 4px;
+  line-height: 1;
+  font-weight: normal;
+}
+
+.details-close-btn:focus, 
+.details-close-btn:hover {
+  color: #111827;
+  outline: none;
+}
+
+.clickable-item {
+  color: #7c3aed !important;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.clickable-item:hover, 
+.clickable-item:focus {
+  color: #6d28d9 !important;
+  text-decoration: underline;
+  outline: none;
+}
+
+.first-time-hint {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+  font-size: 14px;
+  border-radius: 6px;
+  margin-top: 24px;
+  padding: 16px;
+  animation: hint-fadein 0.5s ease;
+}
+
+.first-time-hint ul {
+  margin: 8px 0 0 16px;
+  padding: 0;
+  color: #374151;
+}
+
+.first-time-hint li {
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.first-time-hint b {
+  font-weight: 600;
+  color: #111827;
+}
+
+.ascii-art {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  white-space: pre;
+  font-size: 13px;
+  line-height: 1.2;
+  color: #7c3aed;
+  margin-bottom: 1em;
+  display: block;
+}
+
+/* Welcome screen styles */
+.welcome-title {
+  margin: 16px 0 8px 0;
+  color: #111827;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.welcome-subtitle {
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.welcome-subtitle .heart {
+  color: #ef4444;
+}
+
+.welcome-text {
+  margin-bottom: 16px;
+  color: #374151;
+}
+
+.welcome-heading {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.welcome-heading.project-heading {
+  margin-top: 16px;
+}
+
+.quick-menu {
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.welcome-info {
+  margin-top: 16px;
+  color: #6b7280;
+}
+
+.highlight {
+  color: #7c3aed;
+}
+
+/* Details panel styles */
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 16px;
+}
+
+.details-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.details-description {
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.details-section {
+  margin-bottom: 32px;
+}
+
+.details-section-title {
+  color: #111827;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.details-section-content,
+.details-list {
+  color: #374151;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.details-list {
+  margin-left: 20px;
+  padding-left: 0;
+}
+
+.details-list li {
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.details-list li b {
+  font-weight: 600;
+  color: #111827;
+}
+
+.details-image-wrap {
+  margin-bottom: 24px;
+}
+
+.details-image,
+.architecture-image {
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  background: #ffffff;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.details-image:hover,
+.architecture-image:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* API endpoint styles */
+.details-api-method {
+  color: #7c3aed;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.details-api-path {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: #f9fafb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin: 0 8px;
+  color: #111827;
+}
+
+.details-api-desc {
+  color: #6b7280;
+}
+
+/* Code blocks */
+code {
+  background: #f9fafb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  color: #111827;
+}
+
+/* Animations */
+@keyframes hint-fadein {
+  from { 
+    opacity: 0; 
+    transform: translateY(8px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: none; 
+  }
+}
+
+@keyframes output-fadein {
+  from { 
+    opacity: 0; 
+    transform: translateY(4px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: none; 
+  }
+}
+
+/* Scrollbar styling */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Focus states */
+*:focus {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+}
+
+button:focus,
+.clickable-item:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+}
+
+/* Error states */
+.error {
+  color: #dc2626;
+  background: #fef2f2;
+  border-left: 3px solid #dc2626;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  animation: output-fadein 0.15s ease;
+}
+
+/* Success states */
+.success {
+  color: #059669;
+  background: #ecfdf5;
+  border-left: 3px solid #059669;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  animation: output-fadein 0.15s ease;
+}
+
+/* Warning states */
+.warning {
+  color: #d97706;
+  background: #fffbeb;
+  border-left: 3px solid #d97706;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  animation: output-fadein 0.15s ease;
+}
+
+/* Info states */
+.info {
+  color: #0284c7;
+  background: #f0f9ff;
+  border-left: 3px solid #0284c7;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  animation: output-fadein 0.15s ease;
+}
+
+/* Terminal cursor effect */
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: #7c3aed;
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Improved prompt block */
+.prompt-block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Better spacing for terminal output */
+.terminal-content > div {
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.terminal-content > br {
+  display: block;
+  content: "";
+  margin-bottom: 8px;
+}
+
+/* Accessibility improvements */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Ensure all text is visible */
+.terminal-line,
+.command-block,
+.terminal-content,
+.details-panel,
+.directory-panel,
+.prompt,
+.command-input-terminal,
+.details-section-content,
+.details-list,
+.details-list li,
+.clickable-item,
+.first-time-hint,
+.ascii-art,
+p, div, span {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Force text to be visible */
+.directory-tree-item {
+  color: #4b5563 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.directory-tree-item.active {
+  color: #7c3aed !important;
+  background-color: #ddd6fe !important;
+}
+
+.directory-tree-item:hover {
+  color: #111827 !important;
+  background-color: #f3f4f6 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .directory-panel {
+    width: 240px;
+    min-width: 240px;
+  }
+  
+  .terminal-wrapper.terminal-shifted .terminal {
+    width: calc(100% - 680px);
+  }
+}
+
+@media (max-width: 768px) {
+  .terminal-wrapper {
+    flex-direction: column;
+  }
+  
+  .directory-panel {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    max-height: 200px;
+  }
+  
+  .terminal {
+    width: 100%;
+    padding: 16px;
+  }
+  
+  .terminal-wrapper.terminal-shifted .terminal {
+    width: 100%;
+  }
+  
+  #details-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    border-left: 1px solid #e5e7eb;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .terminal-wrapper.terminal-shifted #details-panel {
+    width: 80%;
+    max-width: 400px;
+  }
+}
+
+/* Directory tree icons */
+.directory-tree-item span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Typography adjustments to match Claude */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #111827;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+/* Button hover states similar to Claude */
+button {
+  transition: all 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Terminal specific styling that matches Claude's clean aesthetic */
+.terminal-content {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.command-input-terminal {
+  font-size: 15px;
+}
+
+/* Print styles */
+@media print {
+  .terminal-wrapper {
+    display: block;
+  }
+  
+  .directory-panel,
+  #details-panel,
+  .details-close-btn {
+    display: none !important;
+  }
+  
+  .terminal {
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+}
+
+/* Override any inherited styles that might conflict */
+#directory-panel,
+.directory-panel {
+  background: #f8fafc !important;
+  color: #374151 !important;
+}
+
+.directory-tree-item * {
+  color: inherit !important;
+}
+
+/* Remove any unwanted borders or shadows */
+.terminal,
+.terminal-content,
+.command-line,
+.directory-panel,
+#directory-panel,
+#details-panel {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Ensure clean borders */
+.directory-panel,
+#directory-panel {
+  border-right: 1px solid #e5e7eb !important;
+  border-left: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+#details-panel {
+  border-left: 1px solid #e5e7eb !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.terminal {
+  border: none !important;
+}
+
+.command-line {
+  border-top: 1px solid #e5e7eb !important;
+  border-right: none !important;
+  border-left: none !important;
+  border-bottom: none !important;
+}

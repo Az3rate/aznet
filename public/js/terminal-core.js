@@ -116,7 +116,7 @@ export class Terminal {
       const output = candidates.map(item => item.type === 'directory' ? item.name + '/' : item.name).join('    ');
       printCommand(this, this.input.value);
       this.input.value = inputValue;
-      this.content.innerHTML += `<div class='command-output'>${output}</div>`;
+      this.content.innerHTML += `<div class='terminal-line'>${output}</div>`;
       appendPrompt(this);
     }
   }
@@ -159,14 +159,14 @@ export const handleCommand = async (input, terminal) => {
             await terminal.commands[command](args);
         } catch (error) {
             logDebug('Command execution error', { error });
-            appendOutput(`Error executing command: ${error.message}`, 'error');
+            await typeText(terminal, `Error executing command: ${error.message}`, 'error');
         }
     } else {
         // Use enhanced error handling for unknown commands
-        const errorMessage = handleCommandError(command);
-        appendOutput(errorMessage, 'error');
+        const errorMessage = handleCommandError(command, terminal.commands);
+        await typeText(terminal, errorMessage, 'error');
     }
     
     // Always append a new prompt
     appendPrompt(terminal);
-}; 
+};

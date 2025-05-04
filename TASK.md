@@ -40,6 +40,18 @@
 - [x] Enhance onboarding for new users in the terminal (2024-06-10)
   - [x] Add a welcome message with tips
   - [x] Add a first-time user guide or hint system
+- [ ] Improve accessibility in the details panel (In Progress)
+  - [ ] Add descriptive alt text to all images
+  - [ ] Ensure keyboard navigation for all interactive elements
+- [x] UI Overhaul: Retro Cyberpunk/Hacking Style (2024-06-10)
+  - [x] Update color palette to neon/cyberpunk tones
+  - [x] Add terminal glow and scanline effects
+  - [x] Animate prompt and output for retro feel
+  - [x] Enhance button and panel transitions
+  - [x] Add subtle background animation or grid
+- [x] Fix duplicate command line for cat (2024-06-10)
+  - [x] Remove manual command-block append in cat command
+- [x] Snap details panel to right of terminal with spacing, and implement slim custom scrollbar for details panel and as default (2024-06-10)
 
 ## Completed Tasks
 - [x] Initial project setup and structure

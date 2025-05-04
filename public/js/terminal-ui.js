@@ -8,9 +8,12 @@ export function appendPrompt(terminal) {
     commandLine.innerHTML = '';
     let promptDiv = document.createElement('div');
     promptDiv.className = 'prompt-block';
-    promptDiv.innerHTML = `<span class="prompt">${terminal.prompt}</span> <input type="text" class="command-input" autofocus>`;
+    promptDiv.innerHTML = `
+      <span class="prompt">${terminal.prompt}</span>
+      <input type="text" class="command-input-terminal" autofocus spellcheck="false" autocomplete="off">
+    `;
     commandLine.appendChild(promptDiv);
-    terminal.input = promptDiv.querySelector('.command-input');
+    terminal.input = promptDiv.querySelector('.command-input-terminal');
     terminal.input.focus();
     if (typeof terminal.setupInputEventListeners === 'function') {
       terminal.setupInputEventListeners();
@@ -32,12 +35,18 @@ export async function printWelcome(terminal) {
   const projects = window.PROJECTS || [];
   let welcomeText = `\n`;
   welcomeText += `<span class='ascii-art'>
-    █████╗ ███████╗███╗   ██╗███████╗████████╗\n   ██╔══██╗╚══███╔╝████╗  ██║██╔════╝╚══██╔══╝\n   ███████║  ███╔╝ ██╔██╗ ██║█████╗     ██║   \n   ██╔══██║ ███╔╝  ██║╚██╗██║██╔══╝     ██║   \n   ██║  ██║███████╗██║ ╚████║███████╗   ██║   \n   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚══════╝   ╚═╝   \n</span>\n`;
-  welcomeText += `<div style='margin: 18px 0 10px 0; color: #28c840; font-size:1.2em;'><b>Welcome to AZNET Terminal Interface</b></div>`;
-  welcomeText += `<div style='margin-bottom: 10px; color: #5f87ff;'>Created with <span style='color:#ff5f57;'>♥</span> by <b>Hugo Villeneuve</b></div>`;
-  welcomeText += `<div style='margin-bottom: 18px;'>Type <span class='clickable-item' data-cmd='help'>help</span> or click a command below to get started.</div>`;
-  welcomeText += `<div style='margin-bottom: 10px;'><b>Quick Menu:</b></div>`;
-  welcomeText += `<div style='margin-bottom: 10px;'>
+    █████╗ ███████╗███╗   ██╗███████╗████████╗
+   ██╔══██╗╚══███╔╝████╗  ██║██╔════╝╚══██╔══╝
+   ███████║  ███╔╝ ██╔██╗ ██║█████╗     ██║   
+   ██╔══██║ ███╔╝  ██║╚██╗██║██╔══╝     ██║   
+   ██║  ██║███████╗██║ ╚████║███████╗   ██║   
+   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚══════╝   ╚═╝   
+</span>\n`;
+  welcomeText += `<div class='welcome-title'>Welcome to AZNET Terminal Interface</div>`;
+  welcomeText += `<div class='welcome-subtitle'>Created with <span class='heart'>♥</span> by <b>Hugo Villeneuve</b></div>`;
+  welcomeText += `<div class='welcome-text'>Type <span class='clickable-item' data-cmd='help'>help</span> or click a command below to get started.</div>`;
+  welcomeText += `<div class='welcome-heading'>Quick Menu:</div>`;
+  welcomeText += `<div class='quick-menu'>
     <span class='clickable-item' data-cmd='about'>about</span> | 
     <span class='clickable-item' data-cmd='projects'>projects</span> | 
     <span class='clickable-item' data-cmd='contact'>contact</span> | 
@@ -45,20 +54,20 @@ export async function printWelcome(terminal) {
     <span class='clickable-item' data-cmd='neofetch'>neofetch</span>
   </div>`;
   if (projects.length > 0) {
-    welcomeText += `<div style='margin-bottom: 10px;'><b>Projects:</b></div>`;
+    welcomeText += `<div class='welcome-heading project-heading'>Projects:</div>`;
     projects.forEach(project => {
       welcomeText += `<span class='clickable-item' data-cmd='cat ${project.name.toLowerCase()}'>${project.name}</span> – ${project.description}<br/>`;
     });
   }
-  welcomeText += `<div style='margin-top: 18px; color: #5f87ff;'>You can also type commands directly, just like a real terminal.</div>`;
+  welcomeText += `<div class='welcome-info'>You can also type commands directly, just like a real terminal.</div>`;
 
   // First-time user hint system
   if (isFirstTimeUser()) {
-    welcomeText += `<div class='first-time-hint' style='margin-top:24px;padding:16px;background:#232323;border:1px solid #444;border-radius:8px;color:#fff;'>
+    welcomeText += `<div class='first-time-hint'>
       <b>First time here?</b><br>
-      <ul style='margin:10px 0 0 18px;padding:0;font-size:1em;'>
+      <ul>
         <li>Try typing <span class='clickable-item' data-cmd='help'>help</span> to see all available commands.</li>
-        <li>Click any <span style='color:#5f87ff;'>blue</span> command or project name to run it instantly.</li>
+        <li>Click any <span class='highlight'>purple</span> command or project name to run it instantly.</li>
         <li>Use <b>Tab</b> for autocomplete and <b>Arrow keys</b> for command history.</li>
         <li>Type <span class='clickable-item' data-cmd='about'>about</span> to learn more about this project.</li>
       </ul>
@@ -79,7 +88,7 @@ export async function typeText(terminal, text, className = '', clickableMap = nu
   const lines = text.split('\n');
   for (const line of lines) {
     const div = document.createElement('div');
-    div.className = className;
+    div.className = `terminal-line ${className}`;
     let html = line;
     for (const [token, cmd] of Object.entries(clickableMap || {})) {
       const regex = new RegExp(token, 'g');
@@ -87,7 +96,6 @@ export async function typeText(terminal, text, className = '', clickableMap = nu
     }
     div.innerHTML = html;
     terminal.content.appendChild(div);
-    terminal.content.appendChild(document.createElement('br'));
   }
   appendPrompt(terminal);
   terminal.isProcessing = false;
@@ -97,8 +105,8 @@ export function printCommand(terminal, command) {
   const div = document.createElement('div');
   div.className = 'command-block';
   div.innerHTML = `
-    <div style="background:#232323;padding:18px 24px;border-radius:8px;margin-bottom:18px;">
-      <span class="prompt" style="color:#28c840;">visitor@aznet:~$</span>
+    <div>
+      <span class="prompt">visitor@aznet:~$</span>
       <span>${command}</span>
     </div>
   `;
@@ -135,4 +143,4 @@ export function setupScrollHandler(terminal) {
   }
   
   return resizeObserver;
-} 
+}

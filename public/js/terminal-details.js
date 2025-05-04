@@ -5,7 +5,7 @@ import { logDebug } from './debug.js';
 function ensureMermaid(callback) {
   if (window.mermaid) {
     logDebug('Mermaid already loaded');
-    window.mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+    window.mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
     callback();
     return;
   }
@@ -15,7 +15,7 @@ function ensureMermaid(callback) {
   script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js';
   script.onload = () => {
     logDebug('Mermaid.js loaded');
-    window.mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+    window.mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
     callback();
   };
   document.head.appendChild(script);
@@ -36,22 +36,19 @@ export function openDetailsPanel(terminal, project) {
     return;
   }
 
-  // Add a border for visual debugging
-  detailsPanel.style.border = '3px solid red';
-
   // Build the details HTML with all sections
   let html = `<div class="details-header">
     <h2>${project.name}</h2>
-    <button class="details-close-btn">×</button>
+    <button class="details-close-btn" tabindex="0" aria-label="Close details panel">×</button>
   </div>
   <div class="details-content">`;
 
   if (project.image) {
     logDebug('Rendering image', { image: project.image });
-    html += `<div class="details-image-wrap"><img src="${project.image}" alt="${project.name} screenshot" class="details-image" style="max-width:100%;border-radius:8px;margin-bottom:1.2rem;box-shadow:0 0 12px #222;" /></div>`;
+    html += `<div class="details-image-wrap"><img src="${project.image}" alt="Screenshot of ${project.name} project interface" class="details-image" /></div>`;
   }
 
-  html += `<p>${project.description}</p>`;
+  html += `<p class="details-description">${project.description}</p>`;
 
   if (project.overview) {
     logDebug('Rendering overview', { overview: project.overview });
@@ -63,7 +60,7 @@ export function openDetailsPanel(terminal, project) {
   }
   if (project.architectureImage) {
     logDebug('Rendering architecture as static image only', { architectureImage: project.architectureImage });
-    html += `<section class="details-section"><div class="details-section-title">Architecture Flowchart</div><img src="${project.architectureImage}" alt="Architecture Flowchart" style="width:100%;max-width:100%;margin-bottom:1.2rem;" /></section>`;
+    html += `<section class="details-section"><div class="details-section-title">Architecture Flowchart</div><img src="${project.architectureImage}" alt="Architecture flowchart for ${project.name}" class="architecture-image" /></section>`;
   }
   if (project.techStack && project.techStack.length) {
     logDebug('Rendering techStack', { techStack: project.techStack });
@@ -89,10 +86,9 @@ export function openDetailsPanel(terminal, project) {
 
   detailsPanel.innerHTML = html;
 
-  // Show the panel and shift the terminal
-  detailsPanel.classList.add('open');
+  // Show the panel
   wrapper.classList.add('terminal-shifted');
-  logDebug('openDetailsPanel: panel opened, content set, terminal-shifted added');
+  logDebug('openDetailsPanel: panel opened, content set');
 
   // Ensure the panel is visible and scrolled into view
   detailsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -113,13 +109,9 @@ export function closeDetailsPanel(terminal) {
     logDebug('closeDetailsPanel: detailsPanel not found');
     return;
   }
-  if (!wrapper) {
-    logDebug('closeDetailsPanel: terminal-wrapper not found');
-    return;
+  if (wrapper) {
+    wrapper.classList.remove('terminal-shifted');
   }
-  
-  detailsPanel.classList.remove('open');
-  wrapper.classList.remove('terminal-shifted');
-  logDebug('closeDetailsPanel: panel closed, terminal-shifted removed');
+  logDebug('closeDetailsPanel: panel closed');
   scrollToBottom(terminal);
-} 
+}

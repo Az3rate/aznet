@@ -7,28 +7,26 @@ import { logDebug } from './debug.js';
 export function terminalCommands(terminal) {
   return {
     async help() {
-      const helpText = `\nAvailable commands:\n  <span class='clickable-item' data-cmd='help'>help</span>        - Show this help message\n  <span class='clickable-item' data-cmd='clear'>clear</span>       - Clear the terminal\n  <span class='clickable-item' data-cmd='about'>about</span>       - Show about information\n  <span class='clickable-item' data-cmd='projects'>projects</span>    - List all projects\n  <span class='clickable-item' data-cmd='contact'>contact</span>     - Show contact information\n  <span class='clickable-item' data-cmd='ls'>ls</span>          - List directory contents\n  <span class='clickable-item' data-cmd='cd projects'>cd [dir]</span>    - Change directory\n  <span class='clickable-item' data-cmd='cat about.txt'>cat [file]</span>  - Read file contents\n  <span class='clickable-item' data-cmd='echo hello'>echo [text]</span> - Print text\n  <span class='clickable-item' data-cmd='neofetch'>neofetch</span>    - Show system information\n  <span class='clickable-item' data-cmd='exit'>exit</span>        - Exit the terminal\n    `;
+      const helpText = `\nAvailable commands:\n  <span class='clickable-item' data-cmd='help'>help</span>        - Show this help message\n  <span class='clickable-item' data-cmd='clear'>clear</span>       - Clear the terminal\n  <span class='clickable-item' data-cmd='about'>about</span>       - Show about information\n  <span class='clickable-item' data-cmd='projects'>projects</span>    - List all projects\n  <span class='clickable-item' data-cmd='contact'>contact</span>     - Show contact information\n  <span class='clickable-item' data-cmd='ls'>ls</span>          - List directory contents\n  <span class='clickable-item' data-cmd='cd projects'>cd [dir]</span>    - Change directory\n  <span class='clickable-item' data-cmd='cat about.txt'>cat [file]</span>  - Read file contents\n  <span class='clickable-item' data-cmd='echo hello'>echo [text]</span> - Print text\n  <span class='clickable-item' data-cmd='neofetch'>neofetch</span>    - Show system information\n  <span class='clickable-item' data-cmd='exit'>exit</span>        - Exit the terminal\n`;
       await typeText(terminal, helpText);
     },
     clear() {
       printWelcome(terminal);
     },
     async about() {
-      const aboutText = `\nAZNET - Terminal Interface\nVersion: 1.0.0\nCreated with ❤️ by Hugo Villeneuve\n\nHi, I'm Hugo! I build tools for gamers and devs who want more than just pretty interfaces.\nThis is a modern terminal-style interface for the AzNet community.\nNavigate through our content using terminal commands or by clicking the menu.\n    `;
+      const aboutText = `\nAZNET - Terminal Interface\nVersion: 1.0.0\nCreated with ❤️ by Hugo Villeneuve\n\nHi, I'm Hugo! I build tools for gamers and devs who want more than just pretty interfaces.\nThis is a modern terminal-style interface for the AzNet community.\nNavigate through our content using terminal commands or by clicking the menu.\n`;
       await typeText(terminal, aboutText);
     },
     async projects() {
       const projects = window.PROJECTS || [];
       let output = 'Available projects:\n\n';
-      const clickableMap = {};
       projects.forEach(project => {
         output += `<span class='clickable-item' data-cmd='cat ${project.name.toLowerCase()}'>${project.name}</span> – ${project.description}\n`;
-        clickableMap[project.name] = `cat ${project.name.toLowerCase()}`;
       });
-      await typeText(terminal, output, '', clickableMap);
+      await typeText(terminal, output);
     },
     async contact() {
-      const contactText = `\nContact Information:\nEmail: contact@aznet.com\nTwitter: @aznet\nGitHub: github.com/aznet\n    `;
+      const contactText = `\nContact Information:\nEmail: contact@aznet.com\nTwitter: @aznet\nGitHub: github.com/aznet\n`;
       await typeText(terminal, contactText);
     },
     async ls() {
@@ -71,16 +69,6 @@ export function terminalCommands(terminal) {
       const project = projects.find(p => p.name.toLowerCase() === argName);
       logDebug('cat: project lookup', { argName, project });
       if (project) {
-        // Print the command first
-        const commandDiv = document.createElement('div');
-        commandDiv.className = 'command-block';
-        commandDiv.innerHTML = `
-          <div style="background:#232323;padding:18px 24px;border-radius:8px;margin-bottom:18px;">
-            <span class="prompt" style="color:#28c840;">visitor@aznet:~$</span>
-            <span>cat ${args[0]}</span>
-          </div>
-        `;
-        terminal.content.appendChild(commandDiv);
         logDebug('cat: opening details panel', { project });
         openDetailsPanel(terminal, project);
         setTimeout(() => {
@@ -102,7 +90,7 @@ export function terminalCommands(terminal) {
       await typeText(terminal, args.join(' '));
     },
     async neofetch() {
-      const neofetchText = `\nvisitor@aznet\n------------\nOS: AZNET Terminal 1.0.0\nHost: Web Browser\nShell: Custom Terminal\nTerminal: AZNET Terminal\nCPU: JavaScript Engine\nMemory: Dynamic\nUptime: ${Math.floor(performance.now() / 1000)}s\n    `;
+      const neofetchText = `\nvisitor@aznet\n------------\nOS: AZNET Terminal 1.0.0\nHost: Web Browser\nShell: Custom Terminal\nTerminal: AZNET Terminal\nCPU: JavaScript Engine\nMemory: Dynamic\nUptime: ${Math.floor(performance.now() / 1000)}s\n`;
       await typeText(terminal, neofetchText);
     },
     async exit() {
@@ -196,4 +184,4 @@ export const handleCommandError = (input, commandsObj) => {
     }
     
     return `Command not found: ${input}\nType 'help' for a list of available commands.`;
-}; 
+};

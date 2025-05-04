@@ -38,4 +38,4 @@ export function setupDirectoryPanelAutoUpdate(terminal) {
     renderDirectoryPanel();
     // Optionally, add listeners to update on cd/ls
     // For now, you can call renderDirectoryPanel() after each command
-} 
+}

@@ -3,6 +3,16 @@
 - Refactored prompt/input handling: event listeners are re-attached after each prompt, and printPrompt was removed (was undefined).
 - If you experience input issues, ensure you are using the latest code and that appendPrompt is called for every new prompt.
 
+## 2024-06-10
+- Fixed: Duplicate command line for cat
+- UI overhaul: Subtle cyberpunk palette, authentic terminal input, and improved layout
+  - Subtle neon/cyberpunk color palette
+  - Terminal glow and scanline effects
+  - Animated prompt and output
+  - Enhanced transitions and background animation
+  - Details panel now snaps to the right of the terminal with consistent spacing (not flush to viewport edge)
+  - All scrollbars (including details panel) use a slim, custom, modern style for visual consistency
+
 ## Running Tests
 
 This project uses [Jest](https://jestjs.io/) for unit testing.
@@ -39,7 +49,16 @@ This project is primarily a showcase of my work and abilities. While I am not ac
 - When you first open the terminal, you'll see a welcome message with quick tips and clickable commands.
 - Type `help` or click the help command for a list of available commands.
 - New users will see a special hint box with tips and guidance the first time they visit the terminal interface.
+- The details panel now includes improved accessibility: all images have descriptive alt text, and all interactive elements are keyboard accessible.
 
 ## Code of Conduct
 
-Participation in this project is governed by a [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a welcoming and inclusive environment. 
+Participation in this project is governed by a [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a welcoming and inclusive environment.
+
+## UI Overhaul: Retro Cyberpunk/Hacking Style
+
+- Neon and cyberpunk-inspired color palette
+- Terminal glow, scanlines, and subtle animated background
+- Animated prompt and output for a retro feel
+- Enhanced transitions for panels and buttons
+- Designed to evoke a classic hacking/cyberpunk terminal vibe 

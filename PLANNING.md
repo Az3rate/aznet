@@ -1,12 +1,22 @@
 # PLANNING.md
 
 ## Current Work in Progress
+- UI Overhaul: Retro Cyberpunk/Hacking Style is complete (2024-06-10)
+  - Subtle neon/cyberpunk color palette
+  - Terminal glow and scanline effects
+  - Animated prompt and output
+  - Enhanced transitions and background animation
+- Fixed duplicate command line for cat (2024-06-10)
+  - Removed manual command-block append in cat command
 - Automated tests and CI/CD pipeline are complete and working (2024-06-10)
 - Documentation for contributors and users is complete (2024-06-10)
 - Code of Conduct is complete (2024-06-10)
 - Onboarding for new users in the terminal is complete (2024-06-10)
   - Welcome message with tips
   - First-time user hint system using localStorage
+- Improving accessibility in the details panel is complete (2024-06-10)
+  - Descriptive alt text for all images
+  - Keyboard navigation for all interactive elements
 - Expanding documentation for contributors and users (In Progress)
   - Adding CONTRIBUTING.md
   - Adding contributor section to README.md
