@@ -38,7 +38,7 @@ This project is primarily a showcase of my work and abilities. While I am not ac
 
 - When you first open the terminal, you'll see a welcome message with quick tips and clickable commands.
 - Type `help` or click the help command for a list of available commands.
-- New users will see hints and guidance for getting started.
+- New users will see a special hint box with tips and guidance the first time they visit the terminal interface.
 
 ## Code of Conduct
 

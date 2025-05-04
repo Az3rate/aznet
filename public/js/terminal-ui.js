@@ -19,12 +19,21 @@ export function appendPrompt(terminal) {
   scrollToBottom(terminal);
 }
 
+// Check for first-time user in localStorage
+function isFirstTimeUser() {
+  return !localStorage.getItem('aznet_terminal_visited');
+}
+
+function setFirstTimeUserFlag() {
+  localStorage.setItem('aznet_terminal_visited', 'true');
+}
+
 export async function printWelcome(terminal) {
   const projects = window.PROJECTS || [];
   let welcomeText = `\n`;
   welcomeText += `<span class='ascii-art'>
     █████╗ ███████╗███╗   ██╗███████╗████████╗\n   ██╔══██╗╚══███╔╝████╗  ██║██╔════╝╚══██╔══╝\n   ███████║  ███╔╝ ██╔██╗ ██║█████╗     ██║   \n   ██╔══██║ ███╔╝  ██║╚██╗██║██╔══╝     ██║   \n   ██║  ██║███████╗██║ ╚████║███████╗   ██║   \n   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚══════╝   ╚═╝   \n</span>\n`;
-  welcomeText += `<div style='margin: 18px 0 10px 0; color: #28c840;'>Welcome to AZNET Terminal Interface</div>`;
+  welcomeText += `<div style='margin: 18px 0 10px 0; color: #28c840; font-size:1.2em;'><b>Welcome to AZNET Terminal Interface</b></div>`;
   welcomeText += `<div style='margin-bottom: 10px; color: #5f87ff;'>Created with <span style='color:#ff5f57;'>♥</span> by <b>Hugo Villeneuve</b></div>`;
   welcomeText += `<div style='margin-bottom: 18px;'>Type <span class='clickable-item' data-cmd='help'>help</span> or click a command below to get started.</div>`;
   welcomeText += `<div style='margin-bottom: 10px;'><b>Quick Menu:</b></div>`;
@@ -42,6 +51,21 @@ export async function printWelcome(terminal) {
     });
   }
   welcomeText += `<div style='margin-top: 18px; color: #5f87ff;'>You can also type commands directly, just like a real terminal.</div>`;
+
+  // First-time user hint system
+  if (isFirstTimeUser()) {
+    welcomeText += `<div class='first-time-hint' style='margin-top:24px;padding:16px;background:#232323;border:1px solid #444;border-radius:8px;color:#fff;'>
+      <b>First time here?</b><br>
+      <ul style='margin:10px 0 0 18px;padding:0;font-size:1em;'>
+        <li>Try typing <span class='clickable-item' data-cmd='help'>help</span> to see all available commands.</li>
+        <li>Click any <span style='color:#5f87ff;'>blue</span> command or project name to run it instantly.</li>
+        <li>Use <b>Tab</b> for autocomplete and <b>Arrow keys</b> for command history.</li>
+        <li>Type <span class='clickable-item' data-cmd='about'>about</span> to learn more about this project.</li>
+      </ul>
+    </div>`;
+    setFirstTimeUserFlag();
+  }
+
   terminal.content.innerHTML = '';
   const div = document.createElement('div');
   div.innerHTML = welcomeText;
