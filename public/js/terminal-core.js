@@ -67,6 +67,8 @@ export class Terminal {
   updatePrompt() {
     const path = fileSystem.getPathString();
     this.prompt = `${path}>`;
+    const promptSpan = document.querySelector('.prompt');
+    if (promptSpan) promptSpan.textContent = this.prompt;
   }
 
   async executeCommand() {

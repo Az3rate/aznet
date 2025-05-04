@@ -9,10 +9,10 @@
   - [ ] Add directory path in prompt
   - [ ] Implement tab completion for directories
   - [ ] Add .. support for parent directory
-- [ ] Add persistent left panel with directory tree
-  - [ ] Panel is always visible
-  - [ ] Shows tree structure of virtual file system
-  - [ ] Visually indicates current directory (cd location)
+- [x] Add persistent left panel with directory tree
+  - [x] Panel is always visible
+  - [x] Shows tree structure of virtual file system
+  - [x] Visually indicates current directory (cd location) — Complete and working as intended
 - [ ] Review and refactor any file approaching 500 lines (Ongoing)
 - [ ] Add automated tests and CI/CD pipeline (Planned)
 - [ ] Expand documentation for contributors and users (Planned)

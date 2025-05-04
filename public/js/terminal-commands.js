@@ -1,6 +1,7 @@
 import { typeText, printWelcome } from './terminal-ui.js';
 import { openDetailsPanel, closeDetailsPanel } from './terminal-details.js';
 import { fileSystem } from './file-system.js';
+import { renderDirectoryPanel } from './directory-panel.js';
 
 export function terminalCommands(terminal) {
   return {
@@ -53,6 +54,7 @@ export function terminalCommands(terminal) {
         await typeText(terminal, `cd: ${args[0]}: No such directory`);
         return;
       }
+      renderDirectoryPanel();
     },
     async pwd() {
       await typeText(terminal, fileSystem.getPathString());
